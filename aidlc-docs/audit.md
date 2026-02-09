@@ -420,3 +420,51 @@ ser Stories Generation Complete
 
 ---
 
+
+## Unit 1 Code Generation Approved
+**Timestamp**: 2026-02-09T12:05:00Z
+**User Input**: "UNIT 2 설계 진행"
+**AI Response**: Unit 1 Code Generation approved, proceeding to Unit 2: Mock API design
+**Context**: Code Generation Unit 1 completed, transitioning to Unit 2 Functional Design
+
+---
+
+
+## Unit 2 Functional Design Plan Created
+**Timestamp**: 2026-02-09T12:10:00Z
+**AI Response**: Created Functional Design plan with 4 clarification questions for Unit 2: Mock API
+**Context**: Functional Design Unit 2 - Plan creation
+**Questions**:
+- Q1: Mock 응답 데이터 소스 (인라인 / 별도 파일 / 시드 데이터 재사용)
+- Q2: 인증 Mock 동작 (완전 통과 / 토큰 존재 확인 / 하드코딩 토큰)
+- Q3: SSE Mock 이벤트 방식 (단일 이벤트 / 주기적 이벤트)
+- Q4: 오류 응답 형식 (FastAPI 기본 / 커스텀)
+
+---
+
+
+## Unit 2 Functional Design Answers Received
+**Timestamp**: 2026-02-09T12:15:00Z
+**User Input**: "답변 완료"
+**AI Response**: Reading user answers from unit2-mock-api-functional-design-plan.md
+**Context**: Functional Design Unit 2 - Processing design decisions
+**User Answers**: 
+- Q1: A (라우터 파일 내 인라인 Mock 데이터)
+- Q2: A (완전 통과 - 인증 없이 모든 요청 통과)
+- Q3: A (단일 이벤트 후 연결 유지)
+- Q4: A (FastAPI 기본 형식 - {"detail": "..."})
+
+---
+
+
+## Unit 2 Functional Design Artifacts Generated
+**Timestamp**: 2026-02-09T12:20:00Z
+**AI Response**: Generated 3 functional design artifacts for Unit 2: Mock API & Core Structure
+**Context**: Functional Design Unit 2 - Artifacts generation complete
+**Artifacts Created**:
+- domain-entities.md: 요청/응답 DTO (고객 7개, 관리자 10개, SSE 2개), Service 인터페이스 5개 (AuthServiceBase, MenuServiceBase, OrderServiceBase, TableServiceBase, EventBusBase), AppConfig 설정 모델
+- business-rules.md: URL 라우팅 규칙 (고객 6개, 관리자 14개, SSE 1개 엔드포인트), CORS 설정, 인증 미들웨어 Mock 동작 (완전 통과), 오류 처리 (FastAPI 기본 형식), SSE Mock 이벤트 규칙, Mock 데이터 일관성 규칙, FastAPI 앱 구성 규칙
+- business-logic-model.md: 고객 API 5개 엔드포인트 Mock 응답 (인라인 dict), 관리자 API 14개 엔드포인트 Mock 응답, SSE Mock 이벤트 로직 (단일 이벤트 + keep-alive), FastAPI 앱 초기화 로직, 전역 예외 핸들러
+
+---
+

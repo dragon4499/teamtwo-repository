@@ -33,7 +33,8 @@
 - [x] Functional Design - Unit 1: DataStore (COMPLETED)
 - [x] NFR Requirements - Unit 1: DataStore (COMPLETED)
 - [x] NFR Design - Unit 1: DataStore (COMPLETED)
-- [-] Code Generation - Unit 1: DataStore (IN PROGRESS)
+- [x] Code Generation - Unit 1: DataStore (COMPLETED)
+- [x] Functional Design - Unit 2: Mock API (COMPLETED)
 - [ ] Infrastructure Design - SKIP
 - [ ] Code Planning - EXECUTE
 - [ ] Code Generation - EXECUTE
