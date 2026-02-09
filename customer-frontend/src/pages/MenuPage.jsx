@@ -21,30 +21,41 @@ export default function MenuPage() {
   const filtered = selectedCat ? menus.filter(m => m.category === selectedCat) : menus
 
   return (
-    <div className="max-w-lg mx-auto px-4 py-4 min-h-screen bg-gray-50">
-      <div className="flex justify-between items-center mb-3">
-        <h1 className="text-xl font-bold text-gray-800">메뉴</h1>
-        <div className="flex gap-2">
-          <button onClick={() => navigate('/orders')}
-            className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-sm font-medium transition">
-            주문내역
-          </button>
-          <CartBadge onClick={() => navigate('/cart')} />
+    <div className="min-h-screen bg-gray-50">
+      {/* 헤더 */}
+      <header className="bg-white shadow-sm sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-gray-800">🍽️ 메뉴</h1>
+          <div className="flex gap-2">
+            <button onClick={() => navigate('/orders')}
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg text-sm font-medium transition">
+              주문내역
+            </button>
+            <CartBadge onClick={() => navigate('/cart')} />
+          </div>
         </div>
+      </header>
+
+      {/* 카테고리 */}
+      <div className="max-w-7xl mx-auto px-6 pt-4">
+        <CategoryNav categories={categories} selected={selectedCat} onSelect={setSelectedCat} />
       </div>
 
-      <CategoryNav categories={categories} selected={selectedCat} onSelect={setSelectedCat} />
+      {/* 메뉴 그리드 */}
+      <div className="max-w-7xl mx-auto px-6 pb-8">
+        {error && <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm">{error}</div>}
+        {loading && <p className="text-center py-12 text-gray-400">로딩 중...</p>}
 
-      {error && <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-3 text-sm">{error}</div>}
-      {loading && <p className="text-center py-8 text-gray-400">로딩 중...</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {filtered.map(menu => (
+            <MenuCard key={menu.id} menu={menu} onAdd={addItem} />
+          ))}
+        </div>
 
-      {filtered.map(menu => (
-        <MenuCard key={menu.id} menu={menu} onAdd={addItem} />
-      ))}
-
-      {!loading && filtered.length === 0 && (
-        <p className="text-center py-16 text-gray-400">메뉴가 없습니다</p>
-      )}
+        {!loading && filtered.length === 0 && (
+          <p className="text-center py-16 text-gray-400">메뉴가 없습니다</p>
+        )}
+      </div>
     </div>
   )
 }
