@@ -27,12 +27,13 @@
 - [x] User Stories (COMPLETED)
 - [x] Workflow Planning (COMPLETED)
 - [x] Application Design (COMPLETED)
-- [ ] Units Generation - EXECUTE (사용자 요청으로 추가)
+- [x] Units Generation (COMPLETED)
 
 ### 🟢 CONSTRUCTION PHASE
-- [ ] Functional Design - EXECUTE
-- [ ] NFR Requirements - EXECUTE
-- [ ] NFR Design - EXECUTE
+- [x] Functional Design - Unit 1: DataStore (COMPLETED)
+- [x] NFR Requirements - Unit 1: DataStore (COMPLETED)
+- [x] NFR Design - Unit 1: DataStore (COMPLETED)
+- [-] Code Generation - Unit 1: DataStore (IN PROGRESS)
 - [ ] Infrastructure Design - SKIP
 - [ ] Code Planning - EXECUTE
 - [ ] Code Generation - EXECUTE
@@ -42,7 +43,7 @@
 - [ ] Operations - PLACEHOLDER
 
 ## Current Status
-- **Lifecycle Phase**: INCEPTION
-- **Current Stage**: Workflow Planning Complete
-- **Next Stage**: Application Design
-- **Status**: Ready to proceed
+- **Lifecycle Phase**: CONSTRUCTION
+- **Current Stage**: Functional Design (Unit 1: DataStore)
+- **Next Stage**: Functional Design per unit → NFR Requirements → NFR Design → Code Generation → Build and Test
+- **Status**: Ready to proceed to CONSTRUCTION PHASE
