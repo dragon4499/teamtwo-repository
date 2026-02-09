@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.config import APP_TITLE, APP_VERSION, CORS_ORIGINS
 from backend.data.seed import seed_data
 from backend.dependencies import datastore
-from backend.middleware.error_handler import global_exception_handler
+from backend.middleware.error_handler import ErrorHandlerMiddleware
 from backend.routers import admin, customer, sse
 
 
@@ -30,8 +30,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global exception handler
-app.add_exception_handler(Exception, global_exception_handler)
+# Global error handler middleware
+app.add_middleware(ErrorHandlerMiddleware)
 
 # Routers
 app.include_router(customer.router)
