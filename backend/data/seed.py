@@ -22,36 +22,36 @@ SEED_STORE = {
 }
 
 SEED_MENUS = [
-    # 메인
-    {"name": "김치찌개", "price": 9000, "category": "메인", "description": "돼지고기와 묵은지로 끓인 김치찌개", "image_url": "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=400&h=300&fit=crop"},
-    {"name": "된장찌개", "price": 8000, "category": "메인", "description": "두부와 야채가 들어간 된장찌개", "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=300&fit=crop"},
-    {"name": "불고기 정식", "price": 12000, "category": "메인", "description": "양념 불고기와 반찬 세트", "image_url": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&h=300&fit=crop"},
-    {"name": "제육볶음", "price": 10000, "category": "메인", "description": "매콤한 돼지고기 제육볶음", "image_url": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=300&fit=crop"},
-    {"name": "비빔밥", "price": 9000, "category": "메인", "description": "신선한 야채와 고추장 비빔밥", "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=400&h=300&fit=crop"},
-    {"name": "순두부찌개", "price": 8500, "category": "메인", "description": "부드러운 순두부와 해물", "image_url": "https://images.unsplash.com/photo-1607532941433-304659e8198a?w=400&h=300&fit=crop"},
-    # 세트메뉴
-    {"name": "불고기+된장찌개 세트", "price": 15000, "category": "세트메뉴", "description": "불고기 정식 + 된장찌개 + 공기밥 (2,000원 할인)", "image_url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop"},
-    {"name": "김치찌개+계란말이 세트", "price": 12000, "category": "세트메뉴", "description": "김치찌개 + 계란말이 + 공기밥 (2,000원 할인)", "image_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop"},
-    {"name": "제육+순두부 세트", "price": 14000, "category": "세트메뉴", "description": "제육볶음 + 순두부찌개 + 공기밥 (2,500원 할인)", "image_url": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop"},
-    {"name": "커플 세트", "price": 25000, "category": "세트메뉴", "description": "불고기 + 비빔밥 + 된장찌개 + 음료 2잔 (5,000원 할인)", "image_url": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop"},
+    # 메인 (Wikimedia Commons CC images)
+    {"name": "김치찌개", "price": 9000, "category": "메인", "description": "돼지고기와 묵은지로 끓인 김치찌개", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Korean_stew-Kimchi_jjigae-05.jpg/400px-Korean_stew-Kimchi_jjigae-05.jpg"},
+    {"name": "된장찌개", "price": 8000, "category": "메인", "description": "두부와 야채가 들어간 된장찌개", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Doenjang-jjigae_4.jpg/400px-Doenjang-jjigae_4.jpg"},
+    {"name": "불고기 정식", "price": 12000, "category": "메인", "description": "양념 불고기와 반찬 세트", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Korean.cuisine-Bulgogi-01.jpg/400px-Korean.cuisine-Bulgogi-01.jpg"},
+    {"name": "제육볶음", "price": 10000, "category": "메인", "description": "매콤한 돼지고기 제육볶음", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Jeyuk-bokkeum.jpg/400px-Jeyuk-bokkeum.jpg"},
+    {"name": "비빔밥", "price": 9000, "category": "메인", "description": "신선한 야채와 고추장 비빔밥", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bibimbap_4.jpg/400px-Bibimbap_4.jpg"},
+    {"name": "순두부찌개", "price": 8500, "category": "메인", "description": "부드러운 순두부와 해물", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Sundubu-jjigae.jpg/400px-Sundubu-jjigae.jpg"},
+    # 세트메뉴 (텍스트 기반 placeholder 이미지)
+    {"name": "불고기+된장찌개 세트", "price": 15000, "category": "세트메뉴", "description": "불고기 정식 + 된장찌개 + 공기밥 (2,000원 할인)", "image_url": "https://placehold.co/400x300/D97706/FFFFFF?font=noto&text=%EB%B6%88%EA%B3%A0%EA%B8%B0%2B%EB%90%9C%EC%9E%A5%EC%B0%8C%EA%B0%9C%0A%EC%84%B8%ED%8A%B8"},
+    {"name": "김치찌개+계란말이 세트", "price": 12000, "category": "세트메뉴", "description": "김치찌개 + 계란말이 + 공기밥 (2,000원 할인)", "image_url": "https://placehold.co/400x300/DC2626/FFFFFF?font=noto&text=%EA%B9%80%EC%B9%98%EC%B0%8C%EA%B0%9C%2B%EA%B3%84%EB%9E%80%EB%A7%90%EC%9D%B4%0A%EC%84%B8%ED%8A%B8"},
+    {"name": "제육+순두부 세트", "price": 14000, "category": "세트메뉴", "description": "제육볶음 + 순두부찌개 + 공기밥 (2,500원 할인)", "image_url": "https://placehold.co/400x300/EA580C/FFFFFF?font=noto&text=%EC%A0%9C%EC%9C%A1%2B%EC%88%9C%EB%91%90%EB%B6%80%0A%EC%84%B8%ED%8A%B8"},
+    {"name": "커플 세트", "price": 25000, "category": "세트메뉴", "description": "불고기 + 비빔밥 + 된장찌개 + 음료 2잔 (5,000원 할인)", "image_url": "https://placehold.co/400x300/E11D48/FFFFFF?font=noto&text=%EC%BB%A4%ED%94%8C+%EC%84%B8%ED%8A%B8%0A%E2%9D%A4"},
     # 사이드
-    {"name": "계란말이", "price": 5000, "category": "사이드", "description": "부드러운 계란말이", "image_url": "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&h=300&fit=crop"},
-    {"name": "김치전", "price": 6000, "category": "사이드", "description": "바삭한 김치전", "image_url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop"},
-    {"name": "두부김치", "price": 7000, "category": "사이드", "description": "구운 두부와 볶음김치", "image_url": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&h=300&fit=crop"},
-    {"name": "잡채", "price": 8000, "category": "사이드", "description": "당면과 야채 잡채", "image_url": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop"},
-    {"name": "해물파전", "price": 10000, "category": "사이드", "description": "해물이 듬뿍 들어간 파전", "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop"},
+    {"name": "계란말이", "price": 5000, "category": "사이드", "description": "부드러운 계란말이", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Aehobak-gyeran-mari.jpg/400px-Aehobak-gyeran-mari.jpg"},
+    {"name": "김치전", "price": 6000, "category": "사이드", "description": "바삭한 김치전", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Korean_pancake-Haemul_kimchijeon-01.jpg/400px-Korean_pancake-Haemul_kimchijeon-01.jpg"},
+    {"name": "두부김치", "price": 7000, "category": "사이드", "description": "구운 두부와 볶음김치", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Korean_cuisine-Dubu_kimchi-01.jpg/400px-Korean_cuisine-Dubu_kimchi-01.jpg"},
+    {"name": "잡채", "price": 8000, "category": "사이드", "description": "당면과 야채 잡채", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Korean.food-Japchae-03.jpg/400px-Korean.food-Japchae-03.jpg"},
+    {"name": "해물파전", "price": 10000, "category": "사이드", "description": "해물이 듬뿍 들어간 파전", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Haemulpajeon.jpg/400px-Haemulpajeon.jpg"},
     # 계절메뉴 (여름: 5~9월)
-    {"name": "냉면 (여름)", "price": 9000, "category": "계절메뉴", "description": "시원한 물냉면 / 비빔냉면 선택", "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"},
-    {"name": "콩국수 (여름)", "price": 8500, "category": "계절메뉴", "description": "고소한 콩국물에 면을 말아낸 여름 별미", "image_url": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&h=300&fit=crop"},
+    {"name": "냉면 (여름)", "price": 9000, "category": "계절메뉴", "description": "시원한 물냉면 / 비빔냉면 선택", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Korean_cuisine-Naengmyeon-01.jpg/400px-Korean_cuisine-Naengmyeon-01.jpg"},
+    {"name": "콩국수 (여름)", "price": 8500, "category": "계절메뉴", "description": "고소한 콩국물에 면을 말아낸 여름 별미", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Korean_noodles-01.jpg/400px-Korean_noodles-01.jpg"},
     # 계절메뉴 (겨울: 10~3월)
-    {"name": "김치수제비 (겨울)", "price": 8000, "category": "계절메뉴", "description": "칼칼한 김치 국물에 쫄깃한 수제비", "image_url": "https://images.unsplash.com/photo-1583224994076-0a3a25a0c0cf?w=400&h=300&fit=crop"},
-    {"name": "갈비탕 (겨울)", "price": 13000, "category": "계절메뉴", "description": "소갈비를 푹 고아낸 진한 갈비탕", "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop"},
+    {"name": "김치수제비 (겨울)", "price": 8000, "category": "계절메뉴", "description": "칼칼한 김치 국물에 쫄깃한 수제비", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Jaecheop-sujebi.jpg/400px-Jaecheop-sujebi.jpg"},
+    {"name": "갈비탕 (겨울)", "price": 13000, "category": "계절메뉴", "description": "소갈비를 푹 고아낸 진한 갈비탕", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Korean_soup-Galbi-nakji-yeonpo-tang.jpg/400px-Korean_soup-Galbi-nakji-yeonpo-tang.jpg"},
     # 사이드 (어묵탕은 상시 사이드로 이동)
-    {"name": "어묵탕", "price": 6000, "category": "사이드", "description": "따뜻한 어묵탕", "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400&h=300&fit=crop"},
+    {"name": "어묵탕", "price": 6000, "category": "사이드", "description": "따뜻한 어묵탕", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Eomuk-bokkeum.jpg/400px-Eomuk-bokkeum.jpg"},
     # 음료
-    {"name": "콜라", "price": 2000, "category": "음료", "description": "코카콜라 355ml", "image_url": "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=300&fit=crop"},
-    {"name": "사이다", "price": 2000, "category": "음료", "description": "칠성사이다 355ml", "image_url": "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=400&h=300&fit=crop"},
-    {"name": "맥주", "price": 4000, "category": "음료", "description": "생맥주 500ml", "image_url": "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&h=300&fit=crop"},
+    {"name": "콜라", "price": 2000, "category": "음료", "description": "코카콜라 355ml", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Coca-Cola_bottles.jpg/400px-Coca-Cola_bottles.jpg"},
+    {"name": "사이다", "price": 2000, "category": "음료", "description": "칠성사이다 355ml", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Lemon_lime_soda.jpg/400px-Lemon_lime_soda.jpg"},
+    {"name": "맥주", "price": 4000, "category": "음료", "description": "생맥주 500ml", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Glass_of_beer.jpg/400px-Glass_of_beer.jpg"},
 ]
 
 
