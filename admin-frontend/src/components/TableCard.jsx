@@ -6,20 +6,24 @@ export default function TableCard({ table, onClick }) {
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
-      className={`bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-lg transition-all duration-200 border-l-4 ${
-        hasSession ? 'border-l-emerald-500' : 'border-l-gray-200'
+      className={`rounded-xl p-4 cursor-pointer transition-all duration-200 border ${
+        hasSession
+          ? 'bg-emerald-50 border-emerald-200 hover:border-emerald-300 hover:shadow-sm'
+          : 'bg-white border-slate-100 hover:border-slate-200 hover:shadow-sm'
       }`}
     >
-      <div className="flex justify-between items-center">
-        <span className="font-bold text-lg text-gray-800">테이블 {table.table_number}</span>
-        <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
-          hasSession ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-400'
+      <div className="flex justify-between items-start">
+        <span className="text-lg font-bold text-slate-800">{table.table_number}</span>
+        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+          hasSession ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400'
         }`}>
-          {hasSession ? '사용중' : '비어있음'}
+          {hasSession ? '사용중' : '빈 테이블'}
         </span>
       </div>
       {hasSession && (
-        <div className="text-xs text-gray-500 mt-2 truncate">세션: {table.current_session.session_id}</div>
+        <div className="text-[11px] text-emerald-600/70 mt-2 truncate font-mono">
+          {table.current_session.session_id}
+        </div>
       )}
     </div>
   )

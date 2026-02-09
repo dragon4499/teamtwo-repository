@@ -36,9 +36,9 @@ export default function KpiPage() {
   const avgRevenue = data.length ? Math.round(totalRevenue / data.length) : 0
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-6 min-h-screen bg-gray-50">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">📈 KPI 대시보드</h1>
+        <h1 className="text-xl font-bold text-slate-800">📈 KPI 대시보드</h1>
         <div className="flex gap-1 bg-white rounded-xl p-1 shadow-sm">
           {PERIODS.map(p => (
             <button key={p.value} onClick={() => setPeriod(p.value)}

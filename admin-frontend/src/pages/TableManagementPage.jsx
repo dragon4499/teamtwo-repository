@@ -25,69 +25,68 @@ export default function TableManagementPage() {
   }
 
   const handleStartSession = async (tableNum) => {
-    try {
-      setError(''); setMsg('')
-      await adminApi.startSession(auth.storeId, tableNum)
-      setMsg(`테이블 ${tableNum} 세션이 시작되었습니다`)
-      load()
-    } catch (e) { setError(e.message) }
+    try { setError(''); await adminApi.startSession(auth.storeId, tableNum); setMsg(`테이블 ${tableNum} 세션 시작`); load() }
+    catch (e) { setError(e.message) }
   }
 
   const handleEndSession = async (tableNum) => {
     if (!confirm(`테이블 ${tableNum} 세션을 종료하시겠습니까?`)) return
-    try {
-      setError(''); setMsg('')
-      await adminApi.endSession(auth.storeId, tableNum)
-      setMsg(`테이블 ${tableNum} 세션이 종료되었습니다`)
-      load()
-    } catch (e) { setError(e.message) }
+    try { setError(''); await adminApi.endSession(auth.storeId, tableNum); setMsg(`테이블 ${tableNum} 세션 종료`); load() }
+    catch (e) { setError(e.message) }
   }
 
+  const inputClass = "w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 outline-none transition"
+
   return (
-    <div className="max-w-4xl mx-auto px-6 py-6 min-h-screen bg-gray-50">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">테이블 관리</h1>
+    <div className="p-6 max-w-4xl">
+      <h1 className="text-xl font-bold text-slate-800 mb-6">테이블 관리</h1>
 
-      {error && <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm">{error}</div>}
-      {msg && <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-xl mb-4 text-sm">{msg}</div>}
+      {error && <div className="bg-red-50 border border-red-100 text-red-500 px-4 py-3 rounded-2xl mb-4 text-sm animate-scale-in">{error}</div>}
+      {msg && <div className="bg-emerald-50 border border-emerald-100 text-emerald-600 px-4 py-3 rounded-2xl mb-4 text-sm animate-scale-in">{msg}</div>}
 
-      <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">새 테이블 추가</h2>
+      {/* 새 테이블 */}
+      <div className="bg-white rounded-2xl border border-slate-100 p-5 mb-6">
+        <h2 className="text-sm font-bold text-slate-800 mb-4">새 테이블 추가</h2>
         <form onSubmit={handleCreate} className="flex gap-3 items-end">
           <div className="flex-1">
-            <label htmlFor="tNum" className="block text-sm font-medium text-gray-700 mb-1">번호</label>
-            <input id="tNum" type="number" min="1" value={newNum} onChange={e => setNewNum(e.target.value)} required
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+            <label htmlFor="tNum" className="block text-xs font-medium text-slate-500 mb-1">번호</label>
+            <input id="tNum" type="number" min="1" value={newNum} onChange={e => setNewNum(e.target.value)} required className={inputClass} />
           </div>
           <div className="flex-1">
-            <label htmlFor="tPwd" className="block text-sm font-medium text-gray-700 mb-1">비밀번호</label>
-            <input id="tPwd" type="password" value={newPwd} onChange={e => setNewPwd(e.target.value)} required
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+            <label htmlFor="tPwd" className="block text-xs font-medium text-slate-500 mb-1">비밀번호</label>
+            <input id="tPwd" type="password" value={newPwd} onChange={e => setNewPwd(e.target.value)} required className={inputClass} />
           </div>
           <button type="submit"
-            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-sm transition-all active:scale-95">
+            className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-semibold transition active:scale-95">
             추가
           </button>
         </form>
       </div>
 
-      <div className="space-y-3">
+      {/* 테이블 목록 */}
+      <div className="space-y-2">
         {tables.map(t => (
-          <div key={t.id} className="bg-white rounded-xl p-4 shadow-sm flex justify-between items-center hover:shadow-md transition-shadow">
-            <div>
-              <span className="font-semibold text-gray-800">테이블 {t.table_number}</span>
-              {t.current_session && (
-                <span className="text-xs text-gray-500 ml-2">세션: {t.current_session.session_id}</span>
-              )}
+          <div key={t.id} className="bg-white rounded-xl border border-slate-100 p-4 flex justify-between items-center hover:border-slate-200 transition">
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold ${
+                t.current_session ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-50 text-slate-400'
+              }`}>{t.table_number}</div>
+              <div>
+                <span className="text-sm font-medium text-slate-800">테이블 {t.table_number}</span>
+                {t.current_session && (
+                  <div className="text-[11px] text-slate-400 font-mono mt-0.5">{t.current_session.session_id}</div>
+                )}
+              </div>
             </div>
-            <div className="flex gap-2">
+            <div>
               {!t.current_session ? (
                 <button onClick={() => handleStartSession(t.table_number)}
-                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-sm font-medium transition active:scale-95">
+                  className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 rounded-lg text-xs font-semibold transition">
                   세션 시작
                 </button>
               ) : (
                 <button onClick={() => handleEndSession(t.table_number)}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition active:scale-95">
+                  className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold transition">
                   세션 종료
                 </button>
               )}

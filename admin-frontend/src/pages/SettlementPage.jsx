@@ -38,8 +38,8 @@ export default function SettlementPage() {
   ]
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-6 min-h-screen bg-gray-50">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">💳 정산</h1>
+    <div className="p-6">
+      <h1 className="text-xl font-bold text-slate-800 mb-6">💳 정산</h1>
 
       <div className="bg-white rounded-2xl shadow-sm p-5 mb-6">
         <div className="flex flex-wrap gap-3 items-end">
