@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+*.egg
+
+# Data (runtime generated)
+data/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+dist/
+
+# Pytest
+.pytest_cache/
+
+# Package locks (frontend)
+customer-frontend/package-lock.json
+admin-frontend/package-lock.json
