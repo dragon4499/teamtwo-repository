@@ -52,3 +52,18 @@ def sample_menu() -> dict:
         "created_at": now,
         "updated_at": now,
     }
+
+
+# --- Unit 2: Mock API fixtures ---
+
+from httpx import ASGITransport, AsyncClient
+
+from backend.main import app
+
+
+@pytest.fixture
+async def client() -> AsyncClient:
+    """FastAPI 테스트용 비동기 HTTP 클라이언트."""
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        yield ac
