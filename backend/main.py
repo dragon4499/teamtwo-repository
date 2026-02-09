@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import APP_TITLE, APP_VERSION, CORS_ORIGINS
-from backend.middleware.error_handler import global_exception_handler
+from backend.middleware.error_handler import register_exception_handlers
 from backend.routers import admin, customer, sse
 
 app = FastAPI(title=APP_TITLE, version=APP_VERSION)
@@ -18,8 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global exception handler
-app.add_exception_handler(Exception, global_exception_handler)
+# Exception handlers
+register_exception_handlers(app)
 
 # Routers
 app.include_router(customer.router)
