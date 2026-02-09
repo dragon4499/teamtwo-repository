@@ -26,9 +26,8 @@
 - [x] Requirements Analysis (COMPLETED)
 - [x] User Stories (COMPLETED)
 - [x] Workflow Planning (COMPLETED)
-- [ ] Application Design - EXECUTE
-- [ ] Units Planning - SKIP
-- [ ] Units Generation - SKIP
+- [x] Application Design (COMPLETED)
+- [ ] Units Generation - EXECUTE (사용자 요청으로 추가)
 
 ### 🟢 CONSTRUCTION PHASE
 - [ ] Functional Design - EXECUTE
