@@ -1,0 +1,40 @@
+.nav {
+  width: 120px;
+  min-width: 120px;
+  background-color: var(--color-background);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  width: 100%;
+  padding: var(--spacing-md);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  min-height: var(--touch-target-min);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.item:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.active {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.active:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+}

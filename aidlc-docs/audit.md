@@ -468,3 +468,299 @@ ser Stories Generation Complete
 
 ---
 
+
+
+## Unit 5 Functional Design Start
+**Timestamp**: 2026-02-09T14:00:00Z
+**User Input**: "UNIT5 설계 진행"
+**AI Response**: Starting Functional Design for Unit 5: Admin Frontend
+**Context**: CONSTRUCTION phase - Functional Design (Unit 5: Admin Frontend)
+
+---
+
+
+## Unit 4 Functional Design Start
+**Timestamp**: 2026-02-09T15:00:00Z
+**User Input**: "UNIT 4 에 대해 기능 설계 비기능 요구사항 정의 비기능 요구사항 설계 인프라 설계 진행해줘"
+**AI Response**: Starting Functional Design for Unit 4: Customer Frontend. Created plan with 8 design questions.
+**Context**: CONSTRUCTION phase - Functional Design (Unit 4: Customer Frontend). User requested 4 stages: Functional Design → NFR Requirements → NFR Design → Infrastructure Design
+
+---
+
+
+## Unit 4 Functional Design Answers Received
+**Timestamp**: 2026-02-09T15:10:00Z
+**User Input**: "답변완료"
+**AI Response**: Reading user answers from unit4-customer-frontend-functional-design-plan.md
+**Context**: Functional Design Unit 4 - Processing design decisions
+**User Answers**: 
+- Q1: B (좌측 세로 사이드바 카테고리)
+- Q2: A (하단 고정 장바구니 바)
+- Q3: B (메뉴 카드에서 +/- 수량 선택 후 추가)
+- Q4: C (주문 확인 페이지에서 수량 조절 + 항목 삭제 모두 가능)
+- Q5: A (5초 카운트다운 자동 리다이렉트)
+- Q6: A (최초 1회 설정 후 localStorage 저장)
+- Q7: C (상단 탭 메뉴/주문내역 + 하단 장바구니 바)
+- Q8: C (중요 오류는 모달, 경미한 오류는 토스트)
+
+---
+
+## Unit 4 Functional Design Artifacts Generated
+**Timestamp**: 2026-02-09T15:15:00Z
+**AI Response**: Generated 3 functional design artifacts for Unit 4: Customer Frontend
+**Context**: Functional Design Unit 4 - Artifacts generation complete
+**Artifacts Created**:
+- domain-entities.md: 6개 Page State/Props, 4개 Shared 컴포넌트 Props, 3개 Context State 모델 (AuthContext, CartContext, MenuContext), API 서비스 인터페이스 5개 메서드, 공통 타입 (ErrorInfo, RouteConfig)
+- business-rules.md: 인증 플로우 10개 규칙, 메뉴 탐색 14개 규칙, 장바구니 관리 22개 규칙, 주문 생성 17개 규칙, 주문 내역 8개 규칙, 네비게이션 5개 규칙, 오류 처리 6개 규칙
+- business-logic-model.md: AuthContext 로직 (초기화/설정/세션만료), CartContext useReducer 로직 (5개 action), MenuContext 로직 (로딩/필터링), API 서비스 호출 로직 (5개 엔드포인트), 6개 페이지별 비즈니스 로직, 예외 처리 및 복구 로직
+
+---
+
+
+## Unit 4 Functional Design Approved
+**Timestamp**: 2026-02-09T15:20:00Z
+**User Input**: "기능 설계 승인 다음 단계로 진행"
+**AI Response**: Functional Design approved, proceeding to NFR Requirements stage
+**Context**: Functional Design Unit 4 completed, moving to NFR Requirements
+
+---
+
+
+## Unit 4 NFR Requirements Plan Created
+**Timestamp**: 2026-02-09T15:25:00Z
+**AI Response**: Created NFR Requirements plan with 10 questions for Unit 4: Customer Frontend
+**Context**: NFR Requirements Unit 4 - Plan creation with frontend-specific questions
+**Questions**:
+- Q1: 프로젝트 생성 도구 (Vite / CRA / Next.js)
+- Q2: CSS 스타일링 방식 (CSS Modules / Tailwind / styled-components / 일반 CSS)
+- Q3: 테스트 프레임워크 (Vitest+RTL / Jest+RTL / Vitest+RTL+Playwright)
+- Q4: HTTP 클라이언트 (fetch API / Axios)
+- Q5: 라우팅 라이브러리 (React Router v6 / TanStack Router)
+- Q6: 페이지 로딩 성능 목표 (빠른 / 표준 / MVP)
+- Q7: 반응형 디자인 범위 (태블릿 전용 / 모바일+태블릿 / 모든 디바이스)
+- Q8: 접근성 수준 (기본 / WCAG 2.1 AA / MVP)
+- Q9: 오프라인 처리 (기본 오류 / 큐잉 / 감지+안내)
+- Q10: 국제화 지원 (한국어 단일 / 다국어 준비)
+
+---
+
+
+## Unit 4 NFR Requirements Answers Received
+**Timestamp**: 2026-02-09T15:30:00Z
+**User Input**: "답변완료"
+**AI Response**: Reading user answers from unit4-customer-frontend-nfr-requirements-plan.md
+**Context**: NFR Requirements Unit 4 - Processing NFR decisions
+**User Answers**: 
+- Q1: A (Vite - 빠른 빌드, HMR, 경량 번들러)
+- Q2: A (CSS Modules - 컴포넌트별 스코프 CSS)
+- Q3: A (Vitest + React Testing Library)
+- Q4: B (Axios - 인터셉터, 자동 JSON 변환)
+- Q5: A (React Router v6)
+- Q6: A (빠른 로딩 - 초기 로드 2초 이내)
+- Q7: A (태블릿 전용 768px~1024px)
+- Q8: A (기본 접근성 - 시맨틱 HTML, alt 텍스트, 키보드 네비게이션)
+- Q9: A (기본 오류 표시 - 모달/토스트 안내, 재시도 버튼)
+- Q10: B (다국어 지원 준비 - react-i18next 도입)
+
+---
+
+
+## Unit 4 NFR Requirements Artifacts Generated
+**Timestamp**: 2026-02-09T15:35:00Z
+**AI Response**: Generated 2 NFR requirements artifacts for Unit 4: Customer Frontend
+**Context**: NFR Requirements Unit 4 - Artifacts generation complete
+**Artifacts Created**:
+- nfr-requirements.md: 성능(페이지 로딩 2초, 렌더링 60fps, API 타임아웃 10초), 보안(localStorage 최소화, XSS 방지, 입력 검증), 신뢰성(오류 처리 모달/토스트, localStorage 영속성, 기본 오프라인 처리), 사용성(태블릿 768~1024px, 기본 접근성, react-i18next 다국어 준비), 유지보수성(ESLint+Prettier, 테스트 커버리지), 호환성(Chrome 90+, Safari 14+)
+- tech-stack-decisions.md: Vite 5.x, React 18.x, React Router v6, Axios 1.x, CSS Modules, react-i18next 14.x, Vitest+RTL, ESLint 9.x, Prettier 3.x, 프로젝트 구조 정의
+
+---
+
+
+## Unit 4 NFR Requirements Approved
+**Timestamp**: 2026-02-09T15:40:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: NFR Requirements approved, proceeding to NFR Design stage
+**Context**: NFR Requirements Unit 4 completed, moving to NFR Design
+
+---
+
+
+## Unit 4 NFR Design Plan Created
+**Timestamp**: 2026-02-09T15:45:00Z
+**AI Response**: Created NFR Design plan with 5 clarification questions for Unit 4: Customer Frontend
+**Context**: NFR Design Unit 4 - Plan creation with frontend-specific design pattern questions
+**Questions**:
+- Q1: Axios 401 자동 재인증 처리 방식 (인터셉터 자동 재시도 / Context 레벨 처리)
+- Q2: React Context 리렌더링 최적화 수준 (기본 / 고급 / MVP)
+- Q3: 코드 스플리팅 전략 (페이지 단위 / 페이지+라이브러리 / 없음)
+- Q4: CSS 디자인 토큰 관리 방식 (CSS Custom Properties / JS 상수 / 직접 값)
+- Q5: 테스트 파일 배치 전략 (분리 / 동일 위치)
+
+---
+
+
+## Unit 4 NFR Design Answers Received
+**Timestamp**: 2026-02-09T15:50:00Z
+**User Input**: "답변완료"
+**AI Response**: Reading user answers from unit4-customer-frontend-nfr-design-plan.md
+**Context**: NFR Design Unit 4 - Processing design pattern decisions
+**User Answers**: 
+- Q1: A (Axios 인터셉터 자동 재인증 + 원래 요청 재시도)
+- Q2: A (기본 최적화 - React.memo + useMemo/useCallback)
+- Q3: A (페이지 단위 코드 스플리팅 - React.lazy)
+- Q4: A (CSS Custom Properties - variables.css :root 변수)
+- Q5: A (tests/ 디렉토리 분리 배치)
+
+---
+
+
+## Unit 4 NFR Design Artifacts Generated
+**Timestamp**: 2026-02-09T15:55:00Z
+**AI Response**: Generated 2 NFR design artifacts for Unit 4: Customer Frontend
+**Context**: NFR Design Unit 4 - Artifacts generation complete
+**Artifacts Created**:
+- nfr-design-patterns.md: 성능(Page-Level Code Splitting, Memoization Strategy, Menu Data Caching), 신뢰성(Transparent Token Refresh, Error Boundary, Graceful localStorage Degradation, Tiered Error Display), 보안(Minimal localStorage Exposure, Input Sanitization Gateway, XSS Prevention), 사용성(CSS Design Token System, Tablet-Optimized Layout, Accessible Component Pattern, i18n Integration), 유지보수성(Separated Test Directory, Consistent Component Structure)
+- logical-components.md: App Shell (App.jsx, AppLayout, ProtectedRoute, ErrorBoundary), Context Providers 3개, Shared UI (Modal, Toast, LoadingSpinner), Services (api.js, storage.js, format.js, i18n.js), Styles 구조, 컴포넌트 의존성 매트릭스
+
+---
+
+
+## Unit 4 NFR Design Approved
+**Timestamp**: 2026-02-09T16:00:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: NFR Design approved, proceeding to Infrastructure Design stage
+**Context**: NFR Design Unit 4 completed, moving to Infrastructure Design
+
+---
+
+
+## Unit 4 Infrastructure Design Plan Created
+**Timestamp**: 2026-02-09T16:05:00Z
+**AI Response**: Created Infrastructure Design plan with 4 questions for Unit 4: Customer Frontend
+**Context**: Infrastructure Design Unit 4 - Plan creation with local dev environment questions
+**Questions**:
+- Q1: 개발 서버 포트 (3000 / 5173)
+- Q2: Backend API 프록시 설정 (Vite proxy / Backend CORS)
+- Q3: Node.js 버전 (20 LTS / 22 LTS / 제한 없음)
+- Q4: 패키지 매니저 (npm / yarn / pnpm)
+
+---
+
+
+## Unit 4 Infrastructure Design Answers Received
+**Timestamp**: 2026-02-09T16:10:00Z
+**User Input**: "답변완료"
+**AI Response**: Reading user answers from unit4-customer-frontend-infrastructure-design-plan.md
+**Context**: Infrastructure Design Unit 4 - Processing infrastructure decisions
+**User Answers**: 
+- Q1: A (포트 3000 - React 기본 포트)
+- Q2: A (Vite proxy 설정 - /api → localhost:8000)
+- Q3: B (Node.js 22 LTS)
+- Q4: A (npm - Node.js 기본 내장)
+
+---
+
+
+## Unit 4 Infrastructure Design Artifacts Generated
+**Timestamp**: 2026-02-09T16:15:00Z
+**AI Response**: Generated 2 infrastructure design artifacts for Unit 4: Customer Frontend
+**Context**: Infrastructure Design Unit 4 - Artifacts generation complete
+**Artifacts Created**:
+- infrastructure-design.md: 개발 환경(Node.js 22 LTS, npm, Vite 포트 3000), API 프록시(/api→localhost:8000), 포트 매트릭스(8000/3000/3001), 빌드 설정(Vite build, 환경 변수), package.json 스크립트, 프로젝트 초기화 절차, Vitest/ESLint/Prettier 설정
+- deployment-architecture.md: 로컬 개발 아키텍처(Vite→FastAPI 프록시), 서비스 간 통신 흐름, 최종 디렉토리 구조(소스+테스트+설정), 개발 워크플로우, .gitignore
+
+---
+
+
+## Unit 4 Infrastructure Design Approved
+**Timestamp**: 2026-02-09T16:20:00Z
+**User Input**: "Continue to Next Stage"
+**AI Response**: Infrastructure Design approved. Unit 4 전체 설계 파이프라인 완료.
+**Context**: Infrastructure Design Unit 4 completed. Unit 4의 4개 설계 단계 모두 완료: Functional Design → NFR Requirements → NFR Design → Infrastructure Design
+
+---
+
+
+## Unit 4 Code Generation Start
+**Timestamp**: 2026-02-09T16:25:00Z
+**User Input**: "Unit 4 Code Generation 진행"
+**AI Response**: Starting Code Generation stage for Unit 4: Customer Frontend. Presenting TDD selection.
+**Context**: CONSTRUCTION phase - Code Generation (Unit 4: Customer Frontend)
+
+---
+
+
+## Unit 4 Code Generation - TDD Selection Prompt
+**Timestamp**: 2026-02-09T16:30:00Z
+**AI Response**: TDD 선택 질문 파일 생성 및 사용자에게 제시
+**Context**: Code Generation Unit 4 - TDD selection step (mandatory before code generation)
+**File Created**: aidlc-docs/construction/plans/unit4-customer-frontend-code-generation-tdd-selection.md
+
+---
+
+
+## Unit 4 Code Generation - TDD Selection Answer
+**Timestamp**: 2026-02-09T16:35:00Z
+**User Input**: "답변완료" - [Answer]: B (일반 방식 Standard)
+**AI Response**: Standard 방식 선택 확인, Code Generation Plan 생성 시작
+**Context**: Code Generation Unit 4 - Standard approach selected
+
+---
+
+
+## Unit 4 Code Generation Plan Created
+**Timestamp**: 2026-02-09T16:40:00Z
+**AI Response**: Code Generation Plan 생성 완료 (16 Steps, 약 60+ 파일)
+**Context**: Code Generation Unit 4 - Part 1 Planning complete
+**File Created**: aidlc-docs/construction/plans/unit4-customer-frontend-code-generation-plan.md
+**Plan Summary**:
+- Step 1: 프로젝트 초기화 및 설정 (9개 파일)
+- Step 2: 글로벌 스타일 (2개 파일)
+- Step 3: 유틸리티/서비스 (4개 파일)
+- Step 4: 국제화 (2개 파일)
+- Step 5: Context Providers (3개 파일)
+- Step 6: 공통 UI 컴포넌트 (5개+CSS)
+- Step 7: Shared 비즈니스 컴포넌트 (4개+CSS)
+- Step 8: App Shell (3개+CSS)
+- Step 9-10: 페이지 컴포넌트 (6개+CSS)
+- Step 11-15: 테스트 (15개 파일)
+- Step 16: 코드 요약 문서
+
+---
+
+## Unit 4 Code Generation Plan Approval Prompt
+**Timestamp**: 2026-02-09T16:40:01Z
+**AI Response**: Requesting user approval for code generation plan
+**Context**: Code Generation Unit 4 - Presenting plan for user review
+
+---
+
+
+## Unit 4 Code Generation Plan Approved
+**Timestamp**: 2026-02-09T16:45:00Z
+**User Input**: "Continue to Next Stage -"
+**AI Response**: Plan approved, starting Part 2 - Code Generation
+**Context**: Code Generation Unit 4 - Plan approved, beginning code generation execution
+
+---
+
+
+## Unit 4 Code Generation Complete
+**Timestamp**: 2026-02-09T17:30:00Z
+**AI Response**: Unit 4 Customer Frontend 코드 생성 완료 (16 Steps 모두 완료)
+**Context**: Code Generation Unit 4 - Part 2 Generation complete
+**Generated Files Summary**:
+- 설정 파일: 9개 (package.json, vite.config.js, vitest.config.js, eslint.config.js, .prettierrc, .env.development, .env.production, .gitignore, index.html)
+- 스타일: 2개 (variables.css, global.css)
+- 유틸리티/서비스: 4개 (storage.js, format.js, validation.js, api.js)
+- 국제화: 2개 (ko.json, i18n.js)
+- Context: 3개 (AuthContext, CartContext, MenuContext)
+- 공통 컴포넌트: 5개+CSS (ErrorBoundary, LoadingSpinner, Modal, Toast, ProtectedRoute)
+- 비즈니스 컴포넌트: 4개+CSS (MenuCard, CategoryNav, CartBadge, CartItem)
+- App Shell: 3개+CSS (AppLayout, App, main)
+- 페이지: 6개+CSS (TableSetup, Menu, Cart, OrderConfirm, OrderSuccess, OrderHistory)
+- 테스트: 16개 (setup + utils 3 + contexts 3 + components 5 + pages 3 + services 1)
+- 문서: 1개 (code-summary.md)
+- 총 60+ 파일 생성
+
+---

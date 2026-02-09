@@ -1,0 +1,78 @@
+{
+  "common": {
+    "retry": "재시도",
+    "cancel": "취소",
+    "confirm": "확인",
+    "close": "닫기",
+    "loading": "로딩 중...",
+    "back": "돌아가기",
+    "refresh": "새로고침"
+  },
+  "auth": {
+    "title": "테이블 설정",
+    "storeId": "매장 식별자",
+    "storeIdPlaceholder": "매장 ID를 입력해주세요",
+    "tableNumber": "테이블 번호",
+    "tableNumberPlaceholder": "테이블 번호를 입력해주세요",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호를 입력해주세요",
+    "submit": "설정 완료",
+    "submitting": "설정 중...",
+    "errorStoreId": "매장 식별자를 입력해주세요",
+    "errorTableNumber": "올바른 테이블 번호를 입력해주세요",
+    "errorPassword": "비밀번호를 입력해주세요",
+    "sessionExpired": "세션이 만료되었습니다"
+  },
+  "menu": {
+    "title": "메뉴",
+    "allCategories": "전체",
+    "soldOut": "품절",
+    "empty": "등록된 메뉴가 없습니다",
+    "loadError": "메뉴를 불러오지 못했습니다"
+  },
+  "cart": {
+    "title": "장바구니",
+    "empty": "장바구니가 비어있습니다",
+    "goToMenu": "메뉴 보기",
+    "clearAll": "장바구니 비우기",
+    "clearConfirm": "장바구니를 비우시겠습니까?",
+    "order": "주문하기",
+    "viewCart": "장바구니 보기",
+    "items": "{{count}}개",
+    "total": "총 {{amount}}",
+    "maxQuantity": "최대 수량은 99개입니다",
+    "saveFailed": "장바구니 저장에 실패했습니다"
+  },
+  "order": {
+    "confirmTitle": "주문 확인",
+    "tableInfo": "테이블 {{number}}번",
+    "placeOrder": "주문 확정",
+    "placing": "주문 중...",
+    "successTitle": "주문이 완료되었습니다!",
+    "orderNumber": "주문 번호",
+    "totalAmount": "총 금액",
+    "countdown": "{{seconds}}초 후 메뉴 화면으로 이동합니다",
+    "viewHistory": "주문 내역 보기",
+    "failRetry": "매장 직원에게 문의해주세요"
+  },
+  "history": {
+    "title": "주문내역",
+    "empty": "아직 주문 내역이 없습니다",
+    "orderNumber": "주문번호",
+    "status": {
+      "pending": "대기중",
+      "preparing": "준비중",
+      "completed": "완료"
+    }
+  },
+  "error": {
+    "network": "네트워크 연결을 확인해주세요",
+    "server": "서버 오류가 발생했습니다",
+    "session": "세션이 만료되었습니다",
+    "unknown": "예기치 않은 오류가 발생했습니다"
+  },
+  "nav": {
+    "menu": "메뉴",
+    "orders": "주문내역"
+  }
+}

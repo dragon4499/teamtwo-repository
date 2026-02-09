@@ -35,6 +35,12 @@
 - [x] NFR Design - Unit 1: DataStore (COMPLETED)
 - [x] Code Generation - Unit 1: DataStore (COMPLETED)
 - [x] Functional Design - Unit 2: Mock API (COMPLETED)
+- [x] Functional Design - Unit 4: Customer Frontend (COMPLETED)
+- [x] NFR Requirements - Unit 4: Customer Frontend (COMPLETED)
+- [x] NFR Design - Unit 4: Customer Frontend (COMPLETED)
+- [x] Infrastructure Design - Unit 4: Customer Frontend (COMPLETED)
+- [x] Code Generation - Unit 4: Customer Frontend (COMPLETED)
+- [ ] Functional Design - Unit 5: Admin Frontend (PENDING)
 - [ ] Infrastructure Design - SKIP
 - [ ] Code Planning - EXECUTE
 - [ ] Code Generation - EXECUTE
