@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 
 const CAT_ICONS = {
   '전체': '🍴', '메인': '🍚', '세트메뉴': '🎁', '사이드': '🥘',
-  '계절메뉴': '🌸', '음료': '🥤', '디저트': '🍰',
+  '계절메뉴': '🌸', '음료': '🥤',
 }
 
 export default function CategoryNav({ categories, selected, onSelect }) {

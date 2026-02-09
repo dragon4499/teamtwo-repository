@@ -103,4 +103,7 @@ export const adminApi = {
   getMenuAnalytics(storeId) {
     return request(`${BASE}/${storeId}/admin/analytics/menus`)
   },
+  getRevenueSummary(storeId) {
+    return request(`${BASE}/${storeId}/admin/analytics/revenue-summary`)
+  },
 }

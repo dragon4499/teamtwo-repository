@@ -17,6 +17,12 @@ async def get_settlement(
     return await analytics_service.get_settlement(store_id, date_from, date_to)
 
 
+@router.get("/revenue-summary")
+async def get_revenue_summary(store_id: str) -> dict:
+    """오늘/이번주/이번달 매출 요약."""
+    return await analytics_service.get_revenue_summary(store_id)
+
+
 @router.get("/kpi")
 async def get_kpi(
     store_id: str,

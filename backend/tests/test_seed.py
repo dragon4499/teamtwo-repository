@@ -24,16 +24,16 @@ class TestSeedData:
         assert users[0]["role"] == "admin"
         assert users[0]["password_hash"].startswith("$2b$")
 
-    async def test_seed_creates_28_menus(self, datastore: DataStore):
+    async def test_seed_creates_23_menus(self, datastore: DataStore):
         await seed_data(datastore)
         menus = await datastore.read("menus", "store001")
-        assert len(menus) == 28
+        assert len(menus) == 23
 
     async def test_seed_menu_categories(self, datastore: DataStore):
         await seed_data(datastore)
         menus = await datastore.read("menus", "store001")
         categories = {m["category"] for m in menus}
-        assert categories == {"메인", "세트메뉴", "사이드", "계절메뉴", "음료", "디저트"}
+        assert categories == {"메인", "세트메뉴", "사이드", "계절메뉴", "음료"}
 
     async def test_seed_initializes_empty_entities(self, datastore: DataStore):
         await seed_data(datastore)
@@ -66,7 +66,7 @@ class TestSeedData:
         assert len(users) == 1
 
         menus = await datastore.read("menus", "store001")
-        assert len(menus) == 28
+        assert len(menus) == 23
 
         # order_history도 중복 없이 동일
         history = await datastore.read("order_history", "store001")

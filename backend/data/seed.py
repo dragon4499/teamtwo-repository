@@ -40,22 +40,18 @@ SEED_MENUS = [
     {"name": "두부김치", "price": 7000, "category": "사이드", "description": "구운 두부와 볶음김치", "image_url": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&h=300&fit=crop"},
     {"name": "잡채", "price": 8000, "category": "사이드", "description": "당면과 야채 잡채", "image_url": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop"},
     {"name": "해물파전", "price": 10000, "category": "사이드", "description": "해물이 듬뿍 들어간 파전", "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop"},
-    # 계절메뉴
+    # 계절메뉴 (여름: 5~9월)
     {"name": "냉면 (여름)", "price": 9000, "category": "계절메뉴", "description": "시원한 물냉면 / 비빔냉면 선택", "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop"},
-    {"name": "팥빙수 (여름)", "price": 7000, "category": "계절메뉴", "description": "달콤한 팥과 얼음의 조화", "image_url": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop"},
-    {"name": "어묵탕 (겨울)", "price": 6000, "category": "계절메뉴", "description": "따뜻한 어묵탕", "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop"},
-    {"name": "호박죽 (겨울)", "price": 5000, "category": "계절메뉴", "description": "달콤하고 부드러운 호박죽", "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=400&h=300&fit=crop"},
+    {"name": "콩국수 (여름)", "price": 8500, "category": "계절메뉴", "description": "고소한 콩국물에 면을 말아낸 여름 별미", "image_url": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&h=300&fit=crop"},
+    # 계절메뉴 (겨울: 10~3월)
+    {"name": "김치수제비 (겨울)", "price": 8000, "category": "계절메뉴", "description": "칼칼한 김치 국물에 쫄깃한 수제비", "image_url": "https://images.unsplash.com/photo-1583224994076-0a3a25a0c0cf?w=400&h=300&fit=crop"},
+    {"name": "갈비탕 (겨울)", "price": 13000, "category": "계절메뉴", "description": "소갈비를 푹 고아낸 진한 갈비탕", "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop"},
+    # 사이드 (어묵탕은 상시 사이드로 이동)
+    {"name": "어묵탕", "price": 6000, "category": "사이드", "description": "따뜻한 어묵탕", "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400&h=300&fit=crop"},
     # 음료
     {"name": "콜라", "price": 2000, "category": "음료", "description": "코카콜라 355ml", "image_url": "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=300&fit=crop"},
     {"name": "사이다", "price": 2000, "category": "음료", "description": "칠성사이다 355ml", "image_url": "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=400&h=300&fit=crop"},
     {"name": "맥주", "price": 4000, "category": "음료", "description": "생맥주 500ml", "image_url": "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&h=300&fit=crop"},
-    {"name": "매실차", "price": 3000, "category": "음료", "description": "달콤한 매실차", "image_url": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop"},
-    {"name": "아메리카노", "price": 3500, "category": "음료", "description": "원두 아메리카노 (HOT/ICE)", "image_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"},
-    # 디저트
-    {"name": "식혜", "price": 3000, "category": "디저트", "description": "전통 식혜", "image_url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=300&fit=crop"},
-    {"name": "아이스크림", "price": 2500, "category": "디저트", "description": "바닐라 아이스크림", "image_url": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&h=300&fit=crop"},
-    {"name": "떡", "price": 3500, "category": "디저트", "description": "모듬 떡", "image_url": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop"},
-    {"name": "약과", "price": 4000, "category": "디저트", "description": "전통 약과 3개", "image_url": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop"},
 ]
 
 
@@ -153,17 +149,18 @@ _POPULARITY = {
     "불고기+된장찌개 세트": 9, "김치찌개+계란말이 세트": 7,
     "제육+순두부 세트": 6, "커플 세트": 5,
     "계란말이": 8, "김치전": 6, "두부김치": 5, "잡채": 4, "해물파전": 7,
-    "냉면 (여름)": 8, "팥빙수 (여름)": 6, "어묵탕 (겨울)": 7, "호박죽 (겨울)": 4,
-    "콜라": 12, "사이다": 8, "맥주": 14, "매실차": 4, "아메리카노": 10,
-    "식혜": 3, "아이스크림": 6, "떡": 3, "약과": 4,
+    "어묵탕": 7,
+    "냉면 (여름)": 8, "콩국수 (여름)": 6,
+    "김치수제비 (겨울)": 7, "갈비탕 (겨울)": 9,
+    "콜라": 12, "사이다": 8, "맥주": 14,
 }
 
 # 계절메뉴 판매 가능 월
 _SEASONAL = {
     "냉면 (여름)": (5, 6, 7, 8, 9),
-    "팥빙수 (여름)": (5, 6, 7, 8, 9),
-    "어묵탕 (겨울)": (10, 11, 12, 1, 2, 3),
-    "호박죽 (겨울)": (10, 11, 12, 1, 2, 3),
+    "콩국수 (여름)": (5, 6, 7, 8, 9),
+    "김치수제비 (겨울)": (10, 11, 12, 1, 2, 3),
+    "갈비탕 (겨울)": (10, 11, 12, 1, 2, 3),
 }
 
 NUM_TABLES = 8

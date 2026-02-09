@@ -61,6 +61,45 @@ class AnalyticsService:
             "date_to": date_to,
         }
 
+    async def get_revenue_summary(self, store_id: str) -> dict:
+        """오늘/이번주/이번달 매출 요약 (정확한 기간 집계)."""
+        orders = await self._get_all_order_data(store_id)
+        now = datetime.now(timezone.utc)
+        today_str = now.strftime("%Y-%m-%d")
+        # 이번 주 월요일
+        week_start = (now - timedelta(days=now.weekday())).strftime("%Y-%m-%d")
+        # 이번 달 1일
+        month_start = now.strftime("%Y-%m-01")
+
+        daily_rev = 0
+        daily_orders = 0
+        weekly_rev = 0
+        weekly_orders = 0
+        monthly_rev = 0
+        monthly_orders = 0
+
+        for o in orders:
+            created = o.get("created_at", "")
+            if not created:
+                continue
+            order_date = created[:10]  # YYYY-MM-DD
+            amt = o.get("total_amount", 0)
+            if order_date == today_str:
+                daily_rev += amt
+                daily_orders += 1
+            if order_date >= week_start:
+                weekly_rev += amt
+                weekly_orders += 1
+            if order_date >= month_start:
+                monthly_rev += amt
+                monthly_orders += 1
+
+        return {
+            "daily": {"revenue": daily_rev, "orders": daily_orders, "date": today_str},
+            "weekly": {"revenue": weekly_rev, "orders": weekly_orders, "start": week_start},
+            "monthly": {"revenue": monthly_rev, "orders": monthly_orders, "start": month_start},
+        }
+
     async def get_kpi_timeseries(self, store_id: str, period: str = "hourly") -> dict:
         """시간대별/일별/주별/월별 KPI 시계열 데이터."""
         orders = await self._get_all_order_data(store_id)
