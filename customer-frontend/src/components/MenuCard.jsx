@@ -1,22 +1,22 @@
-/** 메뉴 카드 */
 export default function MenuCard({ menu, onAdd }) {
   return (
-    <div className="card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div>
-        <div style={{ fontWeight: 600, marginBottom: 4 }}>{menu.name}</div>
+    <div className="bg-white rounded-xl p-4 mb-3 shadow-sm hover:shadow-md transition-shadow duration-200 flex justify-between items-center">
+      <div className="flex-1 mr-3">
+        <div className="font-semibold text-gray-800">{menu.name}</div>
         {menu.description && (
-          <div style={{ fontSize: 13, color: '#6b7280', marginBottom: 4 }}>{menu.description}</div>
+          <div className="text-sm text-gray-500 mt-0.5 line-clamp-1">{menu.description}</div>
         )}
-        <div style={{ fontWeight: 700, color: '#2563eb' }}>
-          {menu.price.toLocaleString()}원
-        </div>
+        <div className="font-bold text-blue-600 mt-1">{menu.price.toLocaleString()}원</div>
       </div>
       <button
-        className="btn-primary"
         onClick={() => onAdd(menu)}
         disabled={!menu.is_available}
-        style={{ minWidth: 60 }}
         aria-label={`${menu.name} 장바구니 추가`}
+        className={`min-w-[64px] px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+          menu.is_available
+            ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow active:scale-95'
+            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+        }`}
       >
         {menu.is_available ? '담기' : '품절'}
       </button>

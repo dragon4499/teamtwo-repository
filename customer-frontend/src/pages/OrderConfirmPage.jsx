@@ -16,9 +16,7 @@ export default function OrderConfirmPage() {
       setSubmitting(true)
       setError('')
       const orderItems = items.map(i => ({ menu_id: i.menu_id, quantity: i.quantity }))
-      const order = await api.createOrder(
-        auth.storeId, auth.tableNumber, auth.session_id, orderItems
-      )
+      const order = await api.createOrder(auth.storeId, auth.tableNumber, auth.session_id, orderItems)
       clearCart()
       navigate('/success', { state: { order } })
     } catch (e) {
@@ -28,33 +26,33 @@ export default function OrderConfirmPage() {
     }
   }
 
-  if (items.length === 0) {
-    navigate('/cart')
-    return null
-  }
+  if (items.length === 0) { navigate('/cart'); return null }
 
   return (
-    <div className="container">
-      <h1>주문 확인</h1>
-      {error && <div className="error-msg">{error}</div>}
+    <div className="max-w-lg mx-auto px-4 py-4 min-h-screen bg-gray-50">
+      <h1 className="text-xl font-bold text-gray-800 mb-4">주문 확인</h1>
+
+      {error && <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-3 text-sm">{error}</div>}
 
       {items.map(item => (
-        <div key={item.menu_id} className="card" style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>{item.menu_name} × {item.quantity}</span>
-          <span style={{ fontWeight: 600 }}>{(item.price * item.quantity).toLocaleString()}원</span>
+        <div key={item.menu_id} className="bg-white rounded-xl p-4 mb-2 shadow-sm flex justify-between">
+          <span className="text-gray-700">{item.menu_name} × {item.quantity}</span>
+          <span className="font-semibold">{(item.price * item.quantity).toLocaleString()}원</span>
         </div>
       ))}
 
-      <div className="card" style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: 16 }}>
+      <div className="bg-white rounded-xl p-4 shadow-sm flex justify-between font-bold text-lg mt-1">
         <span>총 금액</span>
-        <span style={{ color: '#2563eb' }}>{totalAmount.toLocaleString()}원</span>
+        <span className="text-blue-600">{totalAmount.toLocaleString()}원</span>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
-        <button className="btn-secondary" onClick={() => navigate('/cart')} style={{ flex: 1 }}>
+      <div className="flex gap-2 mt-4">
+        <button onClick={() => navigate('/cart')}
+          className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl font-semibold transition">
           돌아가기
         </button>
-        <button className="btn-primary" onClick={handleConfirm} disabled={submitting} style={{ flex: 2 }}>
+        <button onClick={handleConfirm} disabled={submitting}
+          className="flex-[2] py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.98]">
           {submitting ? '주문 중...' : '주문 확정'}
         </button>
       </div>

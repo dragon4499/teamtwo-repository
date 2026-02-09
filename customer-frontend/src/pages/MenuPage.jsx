@@ -18,16 +18,15 @@ export default function MenuPage() {
     if (auth?.storeId) loadMenus(auth.storeId)
   }, [auth?.storeId, loadMenus])
 
-  const filtered = selectedCat
-    ? menus.filter(m => m.category === selectedCat)
-    : menus
+  const filtered = selectedCat ? menus.filter(m => m.category === selectedCat) : menus
 
   return (
-    <div className="container">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <h1>메뉴</h1>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button className="btn-secondary" onClick={() => navigate('/orders')} style={{ fontSize: 13 }}>
+    <div className="max-w-lg mx-auto px-4 py-4 min-h-screen bg-gray-50">
+      <div className="flex justify-between items-center mb-3">
+        <h1 className="text-xl font-bold text-gray-800">메뉴</h1>
+        <div className="flex gap-2">
+          <button onClick={() => navigate('/orders')}
+            className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-sm font-medium transition">
             주문내역
           </button>
           <CartBadge onClick={() => navigate('/cart')} />
@@ -36,15 +35,15 @@ export default function MenuPage() {
 
       <CategoryNav categories={categories} selected={selectedCat} onSelect={setSelectedCat} />
 
-      {error && <div className="error-msg">{error}</div>}
-      {loading && <p style={{ textAlign: 'center', padding: 20 }}>로딩 중...</p>}
+      {error && <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-3 text-sm">{error}</div>}
+      {loading && <p className="text-center py-8 text-gray-400">로딩 중...</p>}
 
       {filtered.map(menu => (
         <MenuCard key={menu.id} menu={menu} onAdd={addItem} />
       ))}
 
       {!loading && filtered.length === 0 && (
-        <p style={{ textAlign: 'center', padding: 40, color: '#9ca3af' }}>메뉴가 없습니다</p>
+        <p className="text-center py-16 text-gray-400">메뉴가 없습니다</p>
       )}
     </div>
   )

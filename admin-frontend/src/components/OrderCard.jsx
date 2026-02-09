@@ -5,39 +5,41 @@ export default function OrderCard({ order, onStatusChange, onDelete }) {
     : order.status === 'preparing' ? 'completed' : null
 
   return (
-    <div className="card">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <span style={{ fontWeight: 600 }}>#{order.order_number}</span>
+    <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex justify-between items-center mb-3">
+        <span className="font-semibold text-gray-800">#{order.order_number}</span>
         <OrderStatusBadge status={order.status} />
       </div>
 
-      {order.items?.map((item, i) => (
-        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#6b7280' }}>
-          <span>{item.menu_name} x {item.quantity}</span>
-          <span>{item.subtotal?.toLocaleString()}원</span>
-        </div>
-      ))}
+      <div className="space-y-1">
+        {order.items?.map((item, i) => (
+          <div key={i} className="flex justify-between text-sm text-gray-500">
+            <span>{item.menu_name} × {item.quantity}</span>
+            <span>{item.subtotal?.toLocaleString()}원</span>
+          </div>
+        ))}
+      </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontWeight: 700 }}>
+      <div className="flex justify-between mt-3 pt-3 border-t border-gray-100 font-bold text-gray-800">
         <span>합계</span>
         <span>{order.total_amount?.toLocaleString()}원</span>
       </div>
 
-      <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+      <div className="flex gap-2 mt-4">
         {nextStatus && (
           <button
-            className={nextStatus === 'preparing' ? 'btn-warning' : 'btn-success'}
             onClick={() => onStatusChange(order.id, nextStatus)}
-            style={{ flex: 1, fontSize: 13 }}
+            className={`flex-1 py-2 rounded-lg text-sm font-semibold transition active:scale-95 ${
+              nextStatus === 'preparing'
+                ? 'bg-amber-500 hover:bg-amber-600 text-white'
+                : 'bg-emerald-500 hover:bg-emerald-600 text-white'
+            }`}
           >
             {nextStatus === 'preparing' ? '준비 시작' : '완료 처리'}
           </button>
         )}
-        <button
-          className="btn-danger"
-          onClick={() => onDelete(order.id)}
-          style={{ fontSize: 13 }}
-        >
+        <button onClick={() => onDelete(order.id)}
+          className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-sm font-medium transition">
           삭제
         </button>
       </div>

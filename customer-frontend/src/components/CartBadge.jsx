@@ -1,4 +1,3 @@
-/** 장바구니 배지 */
 import { useCart } from '../contexts/CartContext'
 
 export default function CartBadge({ onClick }) {
@@ -6,18 +5,12 @@ export default function CartBadge({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="btn-primary"
-      style={{ position: 'relative', padding: '10px 16px' }}
       aria-label={`장바구니 ${totalCount}개`}
+      className="relative bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow"
     >
       🛒 장바구니
       {totalCount > 0 && (
-        <span style={{
-          position: 'absolute', top: -6, right: -6,
-          background: '#ef4444', color: 'white', borderRadius: '50%',
-          width: 22, height: 22, fontSize: 12, fontWeight: 700,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
+        <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs font-bold flex items-center justify-center animate-bounce">
           {totalCount}
         </span>
       )}

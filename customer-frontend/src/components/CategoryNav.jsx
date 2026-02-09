@@ -1,22 +1,25 @@
-/** 카테고리 네비게이션 */
 export default function CategoryNav({ categories, selected, onSelect }) {
   return (
-    <nav style={{
-      display: 'flex', gap: 8, overflowX: 'auto', padding: '8px 0', marginBottom: 12
-    }}>
+    <nav className="flex gap-2 overflow-x-auto pb-2 mb-3 scrollbar-hide">
       <button
-        className={!selected ? 'btn-primary' : 'btn-secondary'}
         onClick={() => onSelect(null)}
-        style={{ whiteSpace: 'nowrap', fontSize: 13 }}
+        className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+          !selected
+            ? 'bg-blue-600 text-white shadow-md'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+        }`}
       >
         전체
       </button>
       {categories.map(cat => (
         <button
           key={cat}
-          className={selected === cat ? 'btn-primary' : 'btn-secondary'}
           onClick={() => onSelect(cat)}
-          style={{ whiteSpace: 'nowrap', fontSize: 13 }}
+          className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            selected === cat
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
         >
           {cat}
         </button>

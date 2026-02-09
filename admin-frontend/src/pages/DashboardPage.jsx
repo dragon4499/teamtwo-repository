@@ -12,39 +12,34 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!auth?.storeId) return
-    adminApi.getTables(auth.storeId)
-      .then(setTables)
-      .catch(() => {})
-      .finally(() => setLoading(false))
+    adminApi.getTables(auth.storeId).then(setTables).catch(() => {}).finally(() => setLoading(false))
   }, [auth?.storeId])
 
-  const refresh = () => {
-    adminApi.getTables(auth.storeId).then(setTables).catch(() => {})
-  }
+  const refresh = () => { adminApi.getTables(auth.storeId).then(setTables).catch(() => {}) }
 
   return (
-    <div className="container">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-        <h1>주문 대시보드</h1>
-        <button className="btn-secondary" onClick={refresh}>새로고침</button>
+    <div className="max-w-6xl mx-auto px-6 py-6 min-h-screen bg-gray-50">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">주문 대시보드</h1>
+        <button onClick={refresh}
+          className="px-4 py-2 bg-white hover:bg-gray-50 text-gray-600 rounded-xl text-sm font-medium border border-gray-200 shadow-sm transition">
+          🔄 새로고침
+        </button>
       </div>
 
-      {loading && <p>로딩 중...</p>}
+      {loading && <p className="text-center py-8 text-gray-400">로딩 중...</p>}
 
-      <div className="grid">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {tables.map(t => (
-          <TableCard
-            key={t.id}
-            table={t}
-            onClick={() => navigate(`/tables/${t.table_number}`)}
-          />
+          <TableCard key={t.id} table={t} onClick={() => navigate(`/tables/${t.table_number}`)} />
         ))}
       </div>
 
       {!loading && tables.length === 0 && (
-        <p style={{ textAlign: 'center', padding: 40, color: '#9ca3af' }}>
-          등록된 테이블이 없습니다. 테이블 관리에서 추가해주세요.
-        </p>
+        <div className="text-center py-16">
+          <div className="text-4xl mb-3">🪑</div>
+          <p className="text-gray-400">등록된 테이블이 없습니다. 테이블 관리에서 추가해주세요.</p>
+        </div>
       )}
     </div>
   )
