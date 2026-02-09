@@ -1,9 +1,9 @@
 """Enum definitions for the table order system."""
 
-from enum import StrEnum
+from enum import Enum
 
 
-class OrderStatus(StrEnum):
+class OrderStatus(str, Enum):
     """주문 상태."""
 
     PENDING = "pending"
@@ -24,14 +24,14 @@ class OrderStatus(StrEnum):
         return target in self.valid_transitions().get(self, [])
 
 
-class SessionStatus(StrEnum):
+class SessionStatus(str, Enum):
     """테이블 세션 상태."""
 
     ACTIVE = "active"
     ENDED = "ended"
 
 
-class UserRole(StrEnum):
+class UserRole(str, Enum):
     """관리자 역할."""
 
     ADMIN = "admin"
