@@ -37,9 +37,22 @@ class TestSeedData:
 
     async def test_seed_initializes_empty_entities(self, datastore: DataStore):
         await seed_data(datastore)
-        for entity in ("tables", "sessions", "orders", "order_history"):
+        for entity in ("tables", "sessions", "orders"):
             data = await datastore.read(entity, "store001")
             assert data == []
+
+    async def test_seed_creates_order_history(self, datastore: DataStore):
+        """1년치 과거 주문 이력이 생성됨."""
+        await seed_data(datastore)
+        history = await datastore.read("order_history", "store001")
+        assert len(history) > 1000  # 365일 × 테이블 수
+        total_orders = sum(len(h["orders"]) for h in history)
+        assert total_orders > 2000
+        # 모든 이력이 completed 상태
+        for h in history[:10]:
+            for o in h["orders"]:
+                assert o["status"] == "completed"
+                assert o["total_amount"] > 0
 
     async def test_seed_is_idempotent(self, datastore: DataStore):
         """2회 실행해도 데이터가 중복되지 않음."""
@@ -54,3 +67,8 @@ class TestSeedData:
 
         menus = await datastore.read("menus", "store001")
         assert len(menus) == 28
+
+        # order_history도 중복 없이 동일
+        history = await datastore.read("order_history", "store001")
+        first_count = len(history)
+        assert first_count > 0

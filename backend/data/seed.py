@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import logging
+import random
 import uuid
+from datetime import datetime, timedelta, timezone
 
 import bcrypt
 
@@ -129,3 +131,145 @@ async def seed_data(datastore: DataStore) -> None:
         if not data:
             await datastore.write(entity, store_id, [])
             logger.info("seed: %s initialized (empty)", entity)
+
+    # 과거 1년치 주문 이력 시딩
+    history = await datastore.read("order_history", store_id)
+    if not history:
+        menus = await datastore.read("menus", store_id)
+        history_data = _build_order_history(store_id, menus)
+        await datastore.write("order_history", store_id, history_data)
+        total_orders = sum(len(h["orders"]) for h in history_data)
+        logger.info("seed: %d history sessions, %d orders created", len(history_data), total_orders)
+
+
+# ---------------------------------------------------------------------------
+# 과거 1년치 주문 이력 생성
+# ---------------------------------------------------------------------------
+
+# 메뉴별 인기도 가중치 (이름 기준)
+_POPULARITY = {
+    "김치찌개": 15, "된장찌개": 10, "불고기 정식": 14, "제육볶음": 12,
+    "비빔밥": 11, "순두부찌개": 8,
+    "불고기+된장찌개 세트": 9, "김치찌개+계란말이 세트": 7,
+    "제육+순두부 세트": 6, "커플 세트": 5,
+    "계란말이": 8, "김치전": 6, "두부김치": 5, "잡채": 4, "해물파전": 7,
+    "냉면 (여름)": 8, "팥빙수 (여름)": 6, "어묵탕 (겨울)": 7, "호박죽 (겨울)": 4,
+    "콜라": 12, "사이다": 8, "맥주": 14, "매실차": 4, "아메리카노": 10,
+    "식혜": 3, "아이스크림": 6, "떡": 3, "약과": 4,
+}
+
+# 계절메뉴 판매 가능 월
+_SEASONAL = {
+    "냉면 (여름)": (5, 6, 7, 8, 9),
+    "팥빙수 (여름)": (5, 6, 7, 8, 9),
+    "어묵탕 (겨울)": (10, 11, 12, 1, 2, 3),
+    "호박죽 (겨울)": (10, 11, 12, 1, 2, 3),
+}
+
+NUM_TABLES = 8
+
+
+def _is_available(menu_name: str, month: int) -> bool:
+    """계절메뉴 판매 가능 여부."""
+    if menu_name in _SEASONAL:
+        return month in _SEASONAL[menu_name]
+    return True
+
+
+def _pick_order_items(menus: list[dict], month: int, rng: random.Random) -> list[dict]:
+    """주문 항목 1~4개 랜덤 선택 (가중치 + 계절 반영)."""
+    available = [m for m in menus if _is_available(m["name"], month)]
+    weights = [_POPULARITY.get(m["name"], 5) for m in available]
+    count = rng.choices([1, 2, 3, 4], weights=[20, 40, 30, 10])[0]
+    count = min(count, len(available))
+    chosen = rng.sample(list(zip(available, weights)), k=count)
+    items = []
+    for menu, _ in chosen:
+        qty = rng.choices([1, 2, 3], weights=[60, 30, 10])[0]
+        items.append({
+            "menu_id": menu["id"],
+            "menu_name": menu["name"],
+            "price": menu["price"],
+            "quantity": qty,
+            "subtotal": menu["price"] * qty,
+        })
+    return items
+
+
+def _orders_per_day(dt: datetime, rng: random.Random) -> int:
+    """요일/시즌에 따른 일일 주문 수."""
+    weekday = dt.weekday()
+    month = dt.month
+    base = 12 if weekday < 5 else 20  # 주말 증가
+    # 여름/겨울 성수기 보정
+    if month in (7, 8, 12):
+        base = int(base * 1.3)
+    elif month in (1, 2, 3):
+        base = int(base * 0.85)
+    return rng.randint(max(5, base - 5), base + 8)
+
+
+def _build_order_history(store_id: str, menus: list[dict]) -> list[dict]:
+    """과거 365일치 주문 이력 생성."""
+    rng = random.Random(42)  # 재현 가능한 시드
+    now = datetime(2026, 2, 9, tzinfo=timezone.utc)
+    start = now - timedelta(days=365)
+    history = []
+    order_seq = 0
+
+    day = start
+    while day < now:
+        n_orders = _orders_per_day(day, rng)
+        # 하루에 여러 세션 (테이블별)
+        tables_today = rng.sample(range(1, NUM_TABLES + 1), k=min(rng.randint(3, NUM_TABLES), NUM_TABLES))
+
+        for table_num in tables_today:
+            session_start = day.replace(
+                hour=rng.choice([11, 12, 12, 13, 18, 18, 19, 19, 20]),
+                minute=rng.randint(0, 59),
+            )
+            session_id = f"T{table_num:02d}-{session_start.strftime('%Y%m%d%H%M%S')}"
+            session_end = session_start + timedelta(minutes=rng.randint(30, 90))
+
+            # 세션당 1~3건 주문
+            session_orders = []
+            n_session_orders = rng.choices([1, 2, 3], weights=[40, 45, 15])[0]
+            for _ in range(n_session_orders):
+                if order_seq >= n_orders * 2:
+                    break
+                order_seq += 1
+                order_time = session_start + timedelta(minutes=rng.randint(0, 30))
+                order_number = f"{order_time.strftime('%Y%m%d')}-{order_seq:05d}"
+                items = _pick_order_items(menus, day.month, rng)
+                total = sum(i["subtotal"] for i in items)
+                session_orders.append({
+                    "id": str(uuid.uuid4()),
+                    "order_number": order_number,
+                    "store_id": store_id,
+                    "table_number": table_num,
+                    "session_id": session_id,
+                    "items": items,
+                    "total_amount": total,
+                    "status": "completed",
+                    "created_at": order_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "updated_at": session_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                })
+
+            if session_orders:
+                session_total = sum(o["total_amount"] for o in session_orders)
+                history.append({
+                    "id": str(uuid.uuid4()),
+                    "store_id": store_id,
+                    "table_number": table_num,
+                    "session_id": session_id,
+                    "orders": session_orders,
+                    "total_session_amount": session_total,
+                    "session_started_at": session_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "session_ended_at": session_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "archived_at": session_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                })
+
+        order_seq = 0
+        day += timedelta(days=1)
+
+    return history
