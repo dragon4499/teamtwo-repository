@@ -9,7 +9,7 @@ from backend.config import APP_TITLE, APP_VERSION, CORS_ORIGINS
 from backend.data.seed import seed_data
 from backend.dependencies import datastore
 from backend.middleware.error_handler import ErrorHandlerMiddleware
-from backend.routers import admin, customer, sse
+from backend.routers import admin, analytics, customer, sse
 
 
 @asynccontextmanager
@@ -36,6 +36,7 @@ app.add_middleware(ErrorHandlerMiddleware)
 # Routers
 app.include_router(customer.router)
 app.include_router(admin.router)
+app.include_router(analytics.router)
 app.include_router(sse.router)
 
 

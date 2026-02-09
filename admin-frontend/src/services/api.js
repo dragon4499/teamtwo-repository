@@ -88,4 +88,19 @@ export const adminApi = {
   deleteMenu(storeId, menuId) {
     return request(`${BASE}/${storeId}/admin/menus/${menuId}`, { method: 'DELETE' })
   },
+
+  // Analytics
+  getSettlement(storeId, dateFrom, dateTo) {
+    const params = new URLSearchParams()
+    if (dateFrom) params.set('date_from', dateFrom)
+    if (dateTo) params.set('date_to', dateTo)
+    const qs = params.toString()
+    return request(`${BASE}/${storeId}/admin/analytics/settlement${qs ? '?' + qs : ''}`)
+  },
+  getKpi(storeId, period = 'daily') {
+    return request(`${BASE}/${storeId}/admin/analytics/kpi?period=${period}`)
+  },
+  getMenuAnalytics(storeId) {
+    return request(`${BASE}/${storeId}/admin/analytics/menus`)
+  },
 }

@@ -24,7 +24,7 @@ SEED_MENUS = [
     {"name": "김치찌개", "price": 9000, "category": "메인", "description": "돼지고기와 묵은지로 끓인 김치찌개", "image_url": "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=400&h=300&fit=crop"},
     {"name": "된장찌개", "price": 8000, "category": "메인", "description": "두부와 야채가 들어간 된장찌개", "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=300&fit=crop"},
     {"name": "불고기 정식", "price": 12000, "category": "메인", "description": "양념 불고기와 반찬 세트", "image_url": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&h=300&fit=crop"},
-    {"name": "제육볶음", "price": 10000, "category": "메인", "description": "매콤한 돼지고기 제육볶음", "image_url": "https://images.unsplash.com/photo-1580651214613-f4692d6d138f?w=400&h=300&fit=crop"},
+    {"name": "제육볶음", "price": 10000, "category": "메인", "description": "매콤한 돼지고기 제육볶음", "image_url": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=300&fit=crop"},
     {"name": "비빔밥", "price": 9000, "category": "메인", "description": "신선한 야채와 고추장 비빔밥", "image_url": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=400&h=300&fit=crop"},
     {"name": "순두부찌개", "price": 8500, "category": "메인", "description": "부드러운 순두부와 해물", "image_url": "https://images.unsplash.com/photo-1607532941433-304659e8198a?w=400&h=300&fit=crop"},
     # 세트메뉴
@@ -50,7 +50,7 @@ SEED_MENUS = [
     {"name": "매실차", "price": 3000, "category": "음료", "description": "달콤한 매실차", "image_url": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop"},
     {"name": "아메리카노", "price": 3500, "category": "음료", "description": "원두 아메리카노 (HOT/ICE)", "image_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"},
     # 디저트
-    {"name": "식혜", "price": 3000, "category": "디저트", "description": "전통 식혜", "image_url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop"},
+    {"name": "식혜", "price": 3000, "category": "디저트", "description": "전통 식혜", "image_url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=300&fit=crop"},
     {"name": "아이스크림", "price": 2500, "category": "디저트", "description": "바닐라 아이스크림", "image_url": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&h=300&fit=crop"},
     {"name": "떡", "price": 3500, "category": "디저트", "description": "모듬 떡", "image_url": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop"},
     {"name": "약과", "price": 4000, "category": "디저트", "description": "전통 약과 3개", "image_url": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop"},
