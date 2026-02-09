@@ -4,9 +4,9 @@ import { useAuth } from '../contexts/AuthContext'
 import { api } from '../services/api'
 
 const STATUS_CONFIG = {
-  pending: { label: '접수됨', color: 'bg-amber-100 text-amber-700', icon: '⏳' },
-  preparing: { label: '조리중', color: 'bg-blue-100 text-blue-700', icon: '👨‍🍳' },
-  completed: { label: '완료', color: 'bg-emerald-100 text-emerald-700', icon: '✅' },
+  pending: { label: '접수됨', color: 'bg-amber-100 text-amber-700', icon: '⏳', waitMin: 15 },
+  preparing: { label: '조리중', color: 'bg-blue-100 text-blue-700', icon: '👨‍🍳', waitMin: 8 },
+  completed: { label: '완료', color: 'bg-emerald-100 text-emerald-700', icon: '✅', waitMin: 0 },
 }
 
 export default function OrderHistoryPage() {
@@ -24,7 +24,14 @@ export default function OrderHistoryPage() {
 
   useEffect(() => { load() }, [auth])
 
+  // 30초마다 자동 새로고침
+  useEffect(() => {
+    const id = setInterval(load, 30000)
+    return () => clearInterval(id)
+  }, [auth])
+
   const totalSpent = orders.reduce((s, o) => s + (o.total_amount || 0), 0)
+  const activeOrders = orders.filter(o => o.status !== 'completed')
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -49,6 +56,28 @@ export default function OrderHistoryPage() {
               <div className="text-lg font-bold text-slate-900 mt-0.5">{totalSpent.toLocaleString()}<span className="text-sm font-normal text-slate-400">원</span></div>
             </div>
             <span className="text-xs text-slate-400">{orders.length}건</span>
+          </div>
+        )}
+
+        {/* 진행중 주문 예상 대기시간 */}
+        {activeOrders.length > 0 && (
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-4 mb-4 animate-fade-in">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm">⏱️</span>
+              <span className="text-sm font-semibold text-blue-800">예상 대기시간</span>
+            </div>
+            <div className="flex gap-3">
+              {activeOrders.map(o => {
+                const cfg = STATUS_CONFIG[o.status] || STATUS_CONFIG.pending
+                return (
+                  <div key={o.id} className="bg-white/70 rounded-xl px-3 py-2 flex-1">
+                    <div className="text-[11px] text-slate-400 font-mono">#{o.order_number?.split('-')[1]}</div>
+                    <div className="text-sm font-bold text-blue-700 mt-0.5">약 {cfg.waitMin}분</div>
+                    <div className="text-[11px] text-slate-500">{cfg.label}</div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         )}
 

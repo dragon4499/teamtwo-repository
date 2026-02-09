@@ -8,7 +8,7 @@ import OrderStatusBadge from '../components/OrderStatusBadge'
 
 export default function DashboardPage() {
   const { auth } = useAdminAuth()
-  const { orders: realtimeOrders } = useOrders()
+  const { orders: realtimeOrders, soundEnabled, toggleSound, newOrderFlash } = useOrders()
   const [tables, setTables] = useState([])
   const [settlement, setSettlement] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -46,11 +46,30 @@ export default function DashboardPage() {
           <h1 className="text-xl font-bold text-slate-800">대시보드</h1>
           <p className="text-xs text-slate-400 mt-0.5">{new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}</p>
         </div>
-        <button onClick={load}
-          className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-500 rounded-xl text-xs font-medium border border-slate-200 transition">
-          🔄 새로고침
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={toggleSound}
+            className={`px-3 py-2 rounded-xl text-xs font-medium border transition flex items-center gap-1.5 ${
+              soundEnabled ? 'bg-amber-50 border-amber-200 text-amber-700' : 'bg-slate-50 border-slate-200 text-slate-400'
+            }`}>
+            {soundEnabled ? '🔔' : '🔕'} 알림음 {soundEnabled ? 'ON' : 'OFF'}
+          </button>
+          <button onClick={load}
+            className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-500 rounded-xl text-xs font-medium border border-slate-200 transition">
+            🔄 새로고침
+          </button>
+        </div>
       </div>
+
+      {/* 신규 주문 토스트 */}
+      {newOrderFlash && (
+        <div className="mb-4 bg-blue-600 text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 animate-scale-in shadow-lg shadow-blue-600/20">
+          <span className="text-lg">🆕</span>
+          <div className="flex-1">
+            <span className="font-semibold text-sm">새 주문 접수!</span>
+            <span className="text-blue-200 text-xs ml-2">T{newOrderFlash.table_number} · {newOrderFlash.items?.length}개 메뉴 · {newOrderFlash.total_amount?.toLocaleString()}원</span>
+          </div>
+        </div>
+      )}
 
       {/* KPI 카드 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
