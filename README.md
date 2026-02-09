@@ -64,6 +64,33 @@ python -m venv .venv
 
 # 의존성 설치
 pip install fastapi uvicorn[standard] aiofiles bcrypt PyJWT pydantic sse-starlette
+- [ ] 서비스 레이어 단위 테스트 추가
+- [ ] API 통합 테스트 (httpx AsyncClient)
+- [ ] OpenAPI 스키마 자동 생성 및 문서화
+- [ ] 프론트엔드 상태 관리 고도화 (Zustand 또는 TanStack Query)
+- [ ] 에러 바운더리 및 로딩 상태 UX 개선
+- [ ] 접근성(a11y) 감사 및 개선
+
+---
+<<<<<<<<< Temporary merge branch 1
+
+## 시드 데이터
+
+| 항목 | 값 |
+|------|-----|
+| Store ID | `store001` |
+| Store Name | 맛있는 식당 |
+| Admin Username | `admin` |
+| Admin Password | `admin1234` |
+| 메뉴 | 12종 (메인 3, 사이드 3, 음료 3, 디저트 3) |
+
+---
+=========
+>>>>>>>>> Temporary merge branch 2
+
+## 라이선스
+
+AIDLC 워크샵 교육용 프로젝트입니다.
 
 # 서버 실행
 python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
@@ -88,11 +115,11 @@ npm run dev    # http://localhost:3000
 ### 4. 사용 흐름
 
 1. 관리자 페이지 접속 → `http://localhost:3001`
-2. 로그인 (`backend/data/seed.py`에 정의된 시드 계정 사용)
+2. 로그인 (시드 계정 정보는 `backend/data/seed.py` 참조)
 3. 테이블 생성 (번호 + 비밀번호 설정)
 4. 테이블 세션 시작
 5. 고객 페이지 접속 → `http://localhost:3000`
-6. `seed.py`에서 설정한 Store ID, 테이블 번호, 비밀번호 입력
+6. Store ID, 테이블 번호, 비밀번호 입력
 7. 메뉴 선택 → 장바구니 → 주문
 
 ---
