@@ -1,7 +1,19 @@
-"""Admin API router with mock responses."""
+"""Admin API router with real service integration."""
 
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel
+
+from backend.dependencies import (
+    get_auth_service,
+    get_menu_service,
+    get_order_service,
+    get_table_service,
+)
+from backend.middleware.auth import get_admin_token
+from backend.services.auth_service import AuthService
+from backend.services.menu_service import MenuService
+from backend.services.order_service import OrderService
+from backend.services.table_service import TableService
 
 router = APIRouter(prefix="/api/stores/{store_id}/admin", tags=["admin"])
 
@@ -43,290 +55,193 @@ class MenuUpdateRequest(BaseModel):
     sort_order: int | None = None
 
 
-# --- Auth Endpoints ---
+# --- Auth Endpoints (공개) ---
 
 
 @router.post("/login")
-async def admin_login(store_id: str, body: AdminLoginRequest) -> dict:
-    """관리자 로그인 (Mock)."""
-    return {
-        "token": "mock-jwt-token-admin",
-        "user": {
-            "id": "mock-admin-001",
-            "username": "admin",
-            "role": "admin",
-        },
-    }
+async def admin_login(
+    store_id: str,
+    body: AdminLoginRequest,
+    auth_svc: AuthService = Depends(get_auth_service),
+) -> dict:
+    """관리자 로그인."""
+    return await auth_svc.login_admin(store_id, body.username, body.password)
 
 
 @router.post("/logout")
-async def admin_logout(store_id: str) -> dict:
-    """관리자 로그아웃 (Mock)."""
+async def admin_logout(
+    store_id: str,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+) -> dict:
+    """관리자 로그아웃."""
+    await auth_svc.logout_admin(token)
     return {"message": "Logged out successfully"}
 
 
-# --- Table Endpoints ---
+# --- Table Endpoints (인증 필요) ---
 
 
 @router.get("/tables")
-async def get_tables(store_id: str) -> list[dict]:
-    """테이블 목록 (Mock)."""
-    return [
-        {
-            "id": "mock-table-001",
-            "table_number": 1,
-            "is_active": True,
-            "current_session": {
-                "session_id": "T01-20260209090000",
-                "started_at": "2026-02-09T12:00:00Z",
-                "expires_at": "2026-02-10T04:00:00Z",
-            },
-        },
-        {
-            "id": "mock-table-002",
-            "table_number": 2,
-            "is_active": True,
-            "current_session": None,
-        },
-        {
-            "id": "mock-table-003",
-            "table_number": 3,
-            "is_active": True,
-            "current_session": None,
-        },
-    ]
+async def get_tables(
+    store_id: str,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    table_svc: TableService = Depends(get_table_service),
+) -> list[dict]:
+    """테이블 목록."""
+    await auth_svc.verify_admin_token(token)
+    return await table_svc.get_tables(store_id)
 
 
 @router.post("/tables", status_code=201)
-async def create_table(store_id: str, body: TableCreateRequest) -> dict:
-    """테이블 생성 (Mock)."""
-    return {
-        "id": "mock-table-new",
-        "table_number": 4,
-        "is_active": True,
-        "current_session": None,
-    }
+async def create_table(
+    store_id: str,
+    body: TableCreateRequest,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    table_svc: TableService = Depends(get_table_service),
+) -> dict:
+    """테이블 생성."""
+    await auth_svc.verify_admin_token(token)
+    return await table_svc.create_table(store_id, body.table_number, body.password)
 
 
 @router.post("/tables/{table_num}/session/start")
-async def start_session(store_id: str, table_num: int) -> dict:
-    """세션 시작 (Mock)."""
-    return {
-        "session_id": "T01-20260209120000",
-        "table_number": 1,
-        "started_at": "2026-02-09T12:00:00Z",
-        "expires_at": "2026-02-10T04:00:00Z",
-        "status": "active",
-    }
+async def start_session(
+    store_id: str,
+    table_num: int,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    table_svc: TableService = Depends(get_table_service),
+) -> dict:
+    """세션 시작."""
+    await auth_svc.verify_admin_token(token)
+    return await table_svc.start_session(store_id, table_num)
 
 
 @router.post("/tables/{table_num}/session/end")
-async def end_session(store_id: str, table_num: int) -> dict:
-    """세션 종료 (Mock)."""
+async def end_session(
+    store_id: str,
+    table_num: int,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    table_svc: TableService = Depends(get_table_service),
+) -> dict:
+    """세션 종료."""
+    await auth_svc.verify_admin_token(token)
+    await table_svc.end_session(store_id, table_num)
     return {"message": "Session ended successfully"}
 
 
-# --- Order Endpoints ---
+# --- Order Endpoints (인증 필요) ---
 
 
 @router.get("/tables/{table_num}/orders")
-async def get_table_orders(store_id: str, table_num: int) -> list[dict]:
-    """테이블 주문 목록 (Mock)."""
-    return [
-        {
-            "id": "mock-order-001",
-            "order_number": "20260209-00001",
-            "table_number": 1,
-            "session_id": "T01-20260209090000",
-            "items": [
-                {
-                    "menu_id": "mock-menu-001",
-                    "menu_name": "김치찌개",
-                    "price": 9000,
-                    "quantity": 2,
-                    "subtotal": 18000,
-                }
-            ],
-            "total_amount": 18000,
-            "status": "pending",
-            "created_at": "2026-02-09T12:00:00Z",
-        },
-        {
-            "id": "mock-order-002",
-            "order_number": "20260209-00002",
-            "table_number": 1,
-            "session_id": "T01-20260209090000",
-            "items": [
-                {
-                    "menu_id": "mock-menu-003",
-                    "menu_name": "불고기 정식",
-                    "price": 12000,
-                    "quantity": 1,
-                    "subtotal": 12000,
-                }
-            ],
-            "total_amount": 12000,
-            "status": "preparing",
-            "created_at": "2026-02-09T12:05:00Z",
-        },
-    ]
+async def get_table_orders(
+    store_id: str,
+    table_num: int,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    order_svc: OrderService = Depends(get_order_service),
+) -> list[dict]:
+    """테이블 주문 목록."""
+    await auth_svc.verify_admin_token(token)
+    return await order_svc.get_orders_by_table(store_id, table_num)
 
 
 @router.get("/tables/{table_num}/history")
-async def get_table_history(store_id: str, table_num: int) -> list[dict]:
-    """과거 주문 이력 (Mock)."""
-    return [
-        {
-            "id": "mock-history-001",
-            "session_id": "T01-20260208090000",
-            "orders": [
-                {
-                    "id": "mock-hist-order-001",
-                    "order_number": "20260208-00001",
-                    "table_number": 1,
-                    "session_id": "T01-20260208090000",
-                    "items": [
-                        {
-                            "menu_id": "mock-menu-001",
-                            "menu_name": "김치찌개",
-                            "price": 9000,
-                            "quantity": 1,
-                            "subtotal": 9000,
-                        }
-                    ],
-                    "total_amount": 9000,
-                    "status": "completed",
-                    "created_at": "2026-02-08T12:00:00Z",
-                }
-            ],
-            "total_session_amount": 9000,
-            "session_started_at": "2026-02-08T09:00:00Z",
-            "session_ended_at": "2026-02-08T22:00:00Z",
-        }
-    ]
+async def get_table_history(
+    store_id: str,
+    table_num: int,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    table_svc: TableService = Depends(get_table_service),
+) -> list[dict]:
+    """과거 주문 이력."""
+    await auth_svc.verify_admin_token(token)
+    return await table_svc.get_order_history(store_id, table_num)
 
 
 @router.patch("/orders/{order_id}/status")
 async def update_order_status(
-    store_id: str, order_id: str, body: OrderStatusUpdateRequest
+    store_id: str,
+    order_id: str,
+    body: OrderStatusUpdateRequest,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    order_svc: OrderService = Depends(get_order_service),
 ) -> dict:
-    """주문 상태 변경 (Mock)."""
-    return {
-        "id": "mock-order-001",
-        "order_number": "20260209-00001",
-        "table_number": 1,
-        "session_id": "T01-20260209090000",
-        "items": [
-            {
-                "menu_id": "mock-menu-001",
-                "menu_name": "김치찌개",
-                "price": 9000,
-                "quantity": 2,
-                "subtotal": 18000,
-            }
-        ],
-        "total_amount": 18000,
-        "status": "preparing",
-        "created_at": "2026-02-09T12:00:00Z",
-    }
+    """주문 상태 변경."""
+    await auth_svc.verify_admin_token(token)
+    return await order_svc.update_order_status(store_id, order_id, body.status)
 
 
 @router.delete("/orders/{order_id}", status_code=204)
-async def delete_order(store_id: str, order_id: str) -> Response:
-    """주문 삭제 (Mock)."""
+async def delete_order(
+    store_id: str,
+    order_id: str,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    order_svc: OrderService = Depends(get_order_service),
+) -> Response:
+    """주문 삭제."""
+    await auth_svc.verify_admin_token(token)
+    await order_svc.delete_order(store_id, order_id)
     return Response(status_code=204)
 
 
-# --- Menu Endpoints ---
+# --- Menu Endpoints (인증 필요) ---
 
 
 @router.get("/menus")
-async def get_menus(store_id: str) -> list[dict]:
-    """메뉴 목록 - 관리자 (Mock)."""
-    return [
-        {
-            "id": "mock-menu-001",
-            "name": "김치찌개",
-            "price": 9000,
-            "description": "돼지고기와 묵은지로 끓인 김치찌개",
-            "category": "메인",
-            "image_url": "",
-            "is_available": True,
-        },
-        {
-            "id": "mock-menu-002",
-            "name": "된장찌개",
-            "price": 8000,
-            "description": "두부와 야채가 들어간 된장찌개",
-            "category": "메인",
-            "image_url": "",
-            "is_available": True,
-        },
-        {
-            "id": "mock-menu-003",
-            "name": "불고기 정식",
-            "price": 12000,
-            "description": "양념 불고기와 반찬 세트",
-            "category": "메인",
-            "image_url": "",
-            "is_available": True,
-        },
-        {
-            "id": "mock-menu-004",
-            "name": "콜라",
-            "price": 2000,
-            "description": "코카콜라 355ml",
-            "category": "음료",
-            "image_url": "",
-            "is_available": True,
-        },
-        {
-            "id": "mock-menu-005",
-            "name": "맥주",
-            "price": 4000,
-            "description": "생맥주 500ml",
-            "category": "음료",
-            "image_url": "",
-            "is_available": True,
-        },
-    ]
+async def get_menus(
+    store_id: str,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    menu_svc: MenuService = Depends(get_menu_service),
+) -> list[dict]:
+    """메뉴 목록 - 관리자."""
+    await auth_svc.verify_admin_token(token)
+    return await menu_svc.get_menus(store_id)
 
 
 @router.post("/menus", status_code=201)
-async def create_menu(store_id: str, body: MenuCreateRequest) -> dict:
-    """메뉴 등록 (Mock)."""
-    return {
-        "id": "mock-menu-new",
-        "name": "새 메뉴",
-        "price": 10000,
-        "description": "새로 등록된 메뉴",
-        "category": "메인",
-        "image_url": "",
-        "is_available": True,
-        "sort_order": 0,
-        "created_at": "2026-02-09T12:00:00Z",
-        "updated_at": "2026-02-09T12:00:00Z",
-    }
+async def create_menu(
+    store_id: str,
+    body: MenuCreateRequest,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    menu_svc: MenuService = Depends(get_menu_service),
+) -> dict:
+    """메뉴 등록."""
+    await auth_svc.verify_admin_token(token)
+    return await menu_svc.create_menu(store_id, body.model_dump())
 
 
 @router.put("/menus/{menu_id}")
-async def update_menu(store_id: str, menu_id: str, body: MenuUpdateRequest) -> dict:
-    """메뉴 수정 (Mock)."""
-    return {
-        "id": "mock-menu-001",
-        "name": "김치찌개 (수정됨)",
-        "price": 10000,
-        "description": "돼지고기와 묵은지로 끓인 김치찌개",
-        "category": "메인",
-        "image_url": "",
-        "is_available": True,
-        "sort_order": 0,
-        "created_at": "2026-02-09T12:00:00Z",
-        "updated_at": "2026-02-09T12:00:00Z",
-    }
+async def update_menu(
+    store_id: str,
+    menu_id: str,
+    body: MenuUpdateRequest,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    menu_svc: MenuService = Depends(get_menu_service),
+) -> dict:
+    """메뉴 수정."""
+    await auth_svc.verify_admin_token(token)
+    return await menu_svc.update_menu(store_id, menu_id, body.model_dump(exclude_unset=True))
 
 
 @router.delete("/menus/{menu_id}", status_code=204)
-async def delete_menu(store_id: str, menu_id: str) -> Response:
-    """메뉴 삭제 (Mock)."""
+async def delete_menu(
+    store_id: str,
+    menu_id: str,
+    token: str = Depends(get_admin_token),
+    auth_svc: AuthService = Depends(get_auth_service),
+    menu_svc: MenuService = Depends(get_menu_service),
+) -> Response:
+    """메뉴 삭제 (소프트 삭제)."""
+    await auth_svc.verify_admin_token(token)
+    await menu_svc.delete_menu(store_id, menu_id)
     return Response(status_code=204)

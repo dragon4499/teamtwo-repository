@@ -513,3 +513,117 @@ ser Stories Generation Complete
 
 ---
 
+
+---
+
+## Unit 3: Functional Design - Questions
+**Timestamp**: 2026-02-09T15:00:00Z
+**AI Response**: "Unit 3 Functional Design 질문 파일 생성 (8개 질문)"
+**Context**: Construction Phase - Unit 3 Functional Design 시작
+
+---
+
+## Unit 3: Functional Design - User Answers
+**Timestamp**: 2026-02-09T15:10:00Z
+**User Input**: "답변 완료. 진행해줘"
+**User Answers**:
+- Q1 (주문 상태 전이): B - 유연한 전이 (pending ↔ preparing → completed)
+- Q2 (로그인 시도 제한): C - 제한 없음 (MVP 생략)
+- Q3 (주문 번호 생성): A - YYYYMMDD-NNNNN
+- Q4 (세션 종료 시 활성 주문): C - 경고 후 종료 (상태 그대로 이력 이동)
+- Q5 (메뉴 삭제 방식): B - 소프트 삭제 (is_available = false)
+- Q6 (JWT 토큰 설정): C - 관리자 24시간, 테이블 세션 16시간
+- Q7 (EventBus 전달 보장): A - Best-effort
+- Q8 (비밀번호 해싱): A - 관리자/테이블 모두 bcrypt
+**AI Response**: "답변 분석 완료, 모순 없음. Functional Design 문서 생성 진행"
+**Context**: Construction Phase - Unit 3 Functional Design 답변 수집 완료
+
+---
+
+## Unit 3: Functional Design - Artifacts Generated
+**Timestamp**: 2026-02-09T15:15:00Z
+**AI Response**: "Functional Design 문서 3개 생성 완료"
+**Artifacts**:
+- aidlc-docs/construction/unit3-business-logic/functional-design/business-logic-model.md
+- aidlc-docs/construction/unit3-business-logic/functional-design/business-rules.md
+- aidlc-docs/construction/unit3-business-logic/functional-design/domain-entities.md
+**Context**: Construction Phase - Unit 3 Functional Design 문서 생성
+
+---
+
+## Unit 3: Functional Design - Approval
+**Timestamp**: 2026-02-09T15:20:00Z
+**User Input**: "진행해줘"
+**AI Response**: "Functional Design 승인 확인, NFR Requirements 단계 진행"
+**Context**: Construction Phase - Unit 3 Functional Design 승인
+
+---
+
+## Unit 3: NFR Requirements - Artifacts Generated
+**Timestamp**: 2026-02-09T15:25:00Z
+**AI Response**: "Unit 1/2 NFR 계승 + Unit 3 고유 NFR 문서 생성 (질문 생략 - 기존 결정사항 재활용)"
+**Artifacts**:
+- aidlc-docs/construction/unit3-business-logic/nfr-requirements/nfr-requirements.md
+- aidlc-docs/construction/unit3-business-logic/nfr-requirements/tech-stack-decisions.md
+**Context**: Construction Phase - Unit 3 NFR Requirements 문서 생성
+
+---
+
+## Unit 3: NFR Requirements - Approval
+**Timestamp**: 2026-02-09T15:30:00Z
+**User Input**: "진행해줘"
+**AI Response**: "NFR Requirements 승인 확인, NFR Design 단계 진행"
+**Context**: Construction Phase - Unit 3 NFR Requirements 승인
+
+---
+
+## Unit 3: NFR Design - Artifacts Generated
+**Timestamp**: 2026-02-09T15:35:00Z
+**AI Response**: "Unit 1/2 패턴 계승 + Unit 3 고유 패턴 문서 생성 (질문 생략)"
+**Artifacts**:
+- aidlc-docs/construction/unit3-business-logic/nfr-design/nfr-design-patterns.md
+- aidlc-docs/construction/unit3-business-logic/nfr-design/logical-components.md
+**Context**: Construction Phase - Unit 3 NFR Design 문서 생성
+
+---
+
+## Unit 3: NFR Design - Approval
+**Timestamp**: 2026-02-09T15:40:00Z
+**User Input**: "Unit 3 남은 과정 진행해줘"
+**AI Response**: "NFR Design 승인 확인, Code Generation 단계 진행"
+**Context**: Construction Phase - Unit 3 NFR Design 승인
+
+---
+
+## Unit 3: Code Generation - TDD Selection
+**Timestamp**: 2026-02-09T15:42:00Z
+**User Input**: "B"
+**AI Response**: "일반 방식(Standard) 선택 확인, Code Generation Plan 생성"
+**Context**: Construction Phase - Unit 3 Code Generation TDD 선택
+
+---
+
+## Unit 3: Code Generation - Plan Created
+**Timestamp**: 2026-02-09T15:45:00Z
+**AI Response**: "Code Generation Plan 생성 완료 (16 Steps)"
+**Artifact**: aidlc-docs/construction/plans/unit3-business-logic-code-generation-plan.md
+**Context**: Construction Phase - Unit 3 Code Generation Plan 승인 대기
+
+---
+
+## Code Generation - Unit 3: Business Logic (Step 15-16 완료)
+**Timestamp**: 2026-02-09T12:00:00Z
+**User Input**: "Unit 3 남은 과정 진행해줘" → "B" (Standard 방식 선택)
+**AI Response**: Step 15 통합 테스트 2개 파일 생성, Step 16 문서화 및 plan 체크박스 업데이트 완료
+**Context**: CONSTRUCTION phase - Code Generation Unit 3 전체 완료
+
+**생성된 파일**:
+- `backend/tests/test_integration_order_flow.py` (5 tests) - 주문 생성→상태변경→이벤트 흐름
+- `backend/tests/test_integration_session_flow.py` (6 tests) - 테이블→세션→주문→종료→이력 흐름
+- `aidlc-docs/construction/unit3-business-logic/code/code-summary.md` - 코드 생성 요약
+
+**업데이트된 파일**:
+- `aidlc-docs/construction/plans/unit3-business-logic-code-generation-plan.md` - 전체 Step [x] 완료
+- `aidlc-docs/aidlc-state.md` - Unit 3 Code Generation COMPLETED
+
+---
