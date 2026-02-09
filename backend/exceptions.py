@@ -34,6 +34,30 @@ class ConcurrencyError(Exception):
         super().__init__(message)
 
 
+class AuthenticationError(Exception):
+    """인증 실패 (401)."""
+
+    def __init__(self, message: str = "Authentication failed") -> None:
+        super().__init__(message)
+
+
+class AccountLockedError(Exception):
+    """계정 잠금 (403)."""
+
+    def __init__(self, locked_until: str) -> None:
+        self.locked_until = locked_until
+        super().__init__(f"Account locked until {locked_until}")
+
+
+class InvalidStateTransitionError(Exception):
+    """잘못된 상태 전이 (400)."""
+
+    def __init__(self, current: str, target: str) -> None:
+        self.current = current
+        self.target = target
+        super().__init__(f"Cannot transition from '{current}' to '{target}'")
+
+
 class DataCorruptionError(Exception):
     """데이터 파일 손상 (500)."""
 
