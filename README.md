@@ -107,7 +107,7 @@ npm run dev    # http://localhost:3000
 │   ├── exceptions.py               # 커스텀 예외 클래스
 │   ├── data/
 │   │   ├── datastore.py            # JSON 파일 기반 비동기 DataStore
-│   │   └── seed.py                 # 초기 시드 데이터 (매장, 관리자, 메뉴 12종)
+│   │   └── seed.py                 # 초기 시드 데이터 (매장, 관리자, 메뉴)
 │   ├── models/
 │   │   ├── enums.py                # OrderStatus, SessionStatus, UserRole
 │   │   └── schemas.py              # Pydantic v2 도메인 모델
@@ -204,7 +204,7 @@ npm run dev    # http://localhost:3000
 - 큐 가득 참 시 이벤트 드롭 (graceful degradation)
 
 ### 인증
-- 관리자: JWT (HS256) + bcrypt 비밀번호 해싱 + 계정 잠금 (5회 실패 → 30분)
+- 관리자: JWT (HS256) + bcrypt 비밀번호 해싱 + 계정 잠금 (5회 실패 시 30분)
 - 고객: 테이블 번호 + 비밀번호 → 활성 세션 반환
 
 ---
