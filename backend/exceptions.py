@@ -17,6 +17,13 @@ class ValidationError(Exception):
         super().__init__(message)
 
 
+class AuthenticationError(Exception):
+    """인증 실패 (401)."""
+
+    def __init__(self, message: str = "Authentication failed") -> None:
+        super().__init__(message)
+
+
 class DuplicateError(Exception):
     """중복 데이터 (409)."""
 

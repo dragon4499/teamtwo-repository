@@ -35,6 +35,7 @@
 - [x] NFR Design - Unit 1: DataStore (COMPLETED)
 - [x] Code Generation - Unit 1: DataStore (COMPLETED)
 - [x] Functional Design - Unit 2: Mock API (COMPLETED)
+<<<<<<< HEAD
 - [x] Functional Design - Unit 4: Customer Frontend (COMPLETED)
 - [x] NFR Requirements - Unit 4: Customer Frontend (COMPLETED)
 - [x] NFR Design - Unit 4: Customer Frontend (COMPLETED)
@@ -44,6 +45,19 @@
 - [ ] Infrastructure Design - SKIP
 - [ ] Code Planning - EXECUTE
 - [ ] Code Generation - EXECUTE
+=======
+- [x] NFR Requirements - Unit 2: Mock API (COMPLETED)
+- [x] NFR Design - Unit 2: Mock API (COMPLETED)
+- [x] Code Generation - Unit 2: Mock API (COMPLETED)
+- [x] Functional Design - Unit 3: Business Logic (COMPLETED)
+- [x] NFR Requirements - Unit 3: Business Logic (COMPLETED)
+- [x] NFR Design - Unit 3: Business Logic (COMPLETED)
+- [x] Code Generation - Unit 3: Business Logic (COMPLETED)
+- [ ] Functional Design - Unit 4: Customer Frontend
+- [ ] Code Generation - Unit 4: Customer Frontend
+- [ ] Functional Design - Unit 5: Admin Frontend
+- [ ] Code Generation - Unit 5: Admin Frontend
+>>>>>>> 8c687f62c193ea8a6816aa20270994da5f4e7e35
 - [ ] Build and Test - EXECUTE
 
 ### 🟡 OPERATIONS PHASE
@@ -51,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Functional Design (Unit 1: DataStore)
-- **Next Stage**: Functional Design per unit → NFR Requirements → NFR Design → Code Generation → Build and Test
-- **Status**: Ready to proceed to CONSTRUCTION PHASE
+- **Current Stage**: Code Generation - Unit 3: Business Logic (COMPLETED)
+- **Next Stage**: Unit 4: Customer Frontend (Functional Design → Code Generation)
+- **Status**: Unit 3 완료, Unit 4 진행 대기

@@ -15,7 +15,7 @@ class OrderStatus(StrEnum):
         """허용된 상태 전이 맵."""
         return {
             cls.PENDING: [cls.PREPARING, cls.COMPLETED],
-            cls.PREPARING: [cls.COMPLETED],
+            cls.PREPARING: [cls.PENDING, cls.COMPLETED],
             cls.COMPLETED: [],
         }
 
